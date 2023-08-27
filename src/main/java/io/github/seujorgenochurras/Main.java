@@ -1,30 +1,30 @@
 package io.github.seujorgenochurras;
 
+import io.github.seujorgenochurras.image.Image;
+import io.github.seujorgenochurras.image.pixel.ImagePixels;
+import io.github.seujorgenochurras.image.pixel.PixelBuilder;
+
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        File image = new File("src/main/resources/73082261.png");
-        BufferedImage bufferedImage = ImageIO.read(image);
-        Graphics imageGraphs = bufferedImage.getGraphics();
+        File imageFile = new File("src/main/resources/buceta.png");
+        BufferedImage bufferedImage = ImageIO.read(imageFile);
+        Image image = new Image(bufferedImage);
 
+        ImagePixels pixels = PixelBuilder.build(image);
 
+        pixels.forEach(pixel -> {
+            pixel.color.getRed().subtract(10);
+            pixel.color.getGreen().add(10);
+            pixel.color.getBlue().add(20);
+        });
 
-        int rawColor = bufferedImage.getRGB(1, 1);
-        Color color = new Color(rawColor, true);
-        System.out.println(rawColor);
-        System.out.println(color.getRed() + ", " +  color.getGreen()+ ", " + color.getBlue());
-
-
-
-        imageGraphs.setColor(Color.BLUE);
-        imageGraphs.drawRect(10, 20, 20, 20);
-
+        image.setPixels(pixels);
         File imageOutput = new File("src/main/resources/out.png");
-        ImageIO.write(bufferedImage, "png", imageOutput);
+        ImageIO.write(image.getBufferedImage(), "png", imageOutput);
     }
 }

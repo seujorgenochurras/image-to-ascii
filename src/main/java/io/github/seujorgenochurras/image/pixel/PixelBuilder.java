@@ -1,5 +1,7 @@
 package io.github.seujorgenochurras.image.pixel;
 
+import io.github.seujorgenochurras.image.Image;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -15,9 +17,13 @@ public class PixelBuilder {
 
         for (int i = 0; i < imageWidth; i++) {
             for (int j = 0; j < imageHeight; j++) {
-                pixels.add(new Color(image.getRGB(i, j)));
+                Color pixelColor = new Color(image.getRGB(i, j));
+                pixels.add(new ImagePixel(pixelColor, i, j));
             }
         }
         return pixels;
+    }
+    public static ImagePixels build(Image image){
+        return build(image.getBufferedImage());
     }
 }
