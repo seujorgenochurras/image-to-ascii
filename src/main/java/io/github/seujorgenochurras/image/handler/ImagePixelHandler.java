@@ -1,11 +1,11 @@
 package io.github.seujorgenochurras.image.handler;
 
-import io.github.seujorgenochurras.image.pixel.ImagePixels;
+import io.github.seujorgenochurras.image.pixel.ImagePixelGroup;
 
 public class ImagePixelHandler {
-    private final ImagePixels pixels;
+    private final ImagePixelGroup pixels;
 
-    public ImagePixelHandler(ImagePixels pixels) {
+    public ImagePixelHandler(ImagePixelGroup pixels) {
         this.pixels = pixels;
     }
 

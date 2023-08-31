@@ -3,7 +3,7 @@ package io.github.seujorgenochurras.image.pixel.color;
 public abstract class ModifiableColor {
     protected int colorValue;
 
-    public ModifiableColor(int colorValue) {
+    protected ModifiableColor(int colorValue) {
         this.colorValue = colorValue;
     }
 
