@@ -1,55 +1,63 @@
 package io.github.seujorgenochurras.image.ascii;
 
 import io.github.seujorgenochurras.image.Image;
-import io.github.seujorgenochurras.util.MathUtils;
-
-import java.util.HashMap;
-import java.util.function.Function;
+import io.github.seujorgenochurras.image.ascii.algorithm.AsciiParserAlgorithm;
+import io.github.seujorgenochurras.util.ArrayUtils;
 
 public class AsciiParserConfig {
-    private final int pixelScale;
+    private final int pixelScaleBefore;
+
+    private final int pixelScaleAfter;
 
     private final String[] pixelLightSymbols;
 
-    private Function<Image, String> parseMethod;
+   // private final AsciiParserAlgorithm parserAlgorithm;
 
-    public AsciiParserConfig(int pixelScale, String[] symbols) {
-        this.pixelScale = pixelScale;
+    public AsciiParserConfig(int pixelScaleBefore, int pixelScaleAfter, String[] symbols) {
+        this.pixelScaleBefore = pixelScaleBefore;
+        this.pixelScaleAfter = pixelScaleAfter;
 
-        this.pixelLightSymbols =symbols;
+        this.pixelLightSymbols = ArrayUtils.reverse(symbols);
+        symbolsGap = 256 / (getPixelLightSymbols().length);
     }
 
-    private HashMap<Integer, String> constructSymbols(String... symbols) {
-        int brightnessGap = Math.round((float) 256 / symbols.length);
-        int currentGap = brightnessGap;
-        HashMap<Integer, String> brightnessSymbols = new HashMap<>();
-        for (String symbol : symbols) {
-            brightnessSymbols.put(currentGap, symbol);
-            currentGap += brightnessGap;
+    private final int symbolsGap;
+    private String getSymbol(int brightness){
+        int symbolIndex = (int) (brightness / (float) symbolsGap) ;
+
+        if(symbolIndex < 0 ){
+            symbolIndex = 0;
+        }else if (symbolIndex > pixelLightSymbols.length -1){
+            symbolIndex = pixelLightSymbols.length -1;
         }
 
-        return brightnessSymbols;
+        return pixelLightSymbols[symbolIndex];
     }
 
     String parse(Image image) {
         StringBuilder builder = new StringBuilder();
 
-
-
         image.getPixels().forEach(pixel -> {
-            int red = pixel.color.getRed().getColorValue();
-            int green = pixel.color.getGreen().getColorValue();
-            int blue = pixel.color.getBlue().getColorValue();
+            int maxBright = pixel.getBrightestPixel();
 
-            int maxBright = MathUtils.max(red, green, blue);
-
-            String symbol = pixelLightSymbols[(Math.round((float) 256 / maxBright)) -1];
+            String symbol = getSymbol(maxBright);
             builder.append(symbol);
 
-            if (pixel.x == image.getBufferedImage().getHeight() -1) {
-                builder.append("\n");
-            }
+            if (isBorderPixel(pixel.x, image)) builder.append("\n");
         });
         return builder.toString();
     }
+    private boolean isBorderPixel(int pixelPosition, Image image){
+
+        return pixelPosition == image.getBufferedImage().getWidth() -1;
+    }
+
+    public int getPixelScaleBefore() {
+        return pixelScaleBefore;
+    }
+
+    public String[] getPixelLightSymbols() {
+        return pixelLightSymbols;
+    }
+
 }
