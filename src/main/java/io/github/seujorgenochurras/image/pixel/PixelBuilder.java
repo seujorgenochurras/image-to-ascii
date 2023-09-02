@@ -17,7 +17,7 @@ public class PixelBuilder {
 
         for (int i = 0; i < imageHeight; i++) {
             for (int j = 0; j < imageWidth; j++) {
-                Color pixelColor = new Color(image.getRGB(i, j));
+                Color pixelColor = new Color(image.getRGB(j, i));
                 pixels.add(new ImagePixel(pixelColor, j, i));
             }
         }

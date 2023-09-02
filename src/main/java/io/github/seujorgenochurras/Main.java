@@ -4,8 +4,6 @@ import io.github.seujorgenochurras.image.Image;
 import io.github.seujorgenochurras.image.ascii.AsciiParser;
 import io.github.seujorgenochurras.image.ascii.AsciiParserBuilder;
 import io.github.seujorgenochurras.image.ascii.AsciiParserConfig;
-import io.github.seujorgenochurras.image.pixel.ImagePixelGroup;
-import io.github.seujorgenochurras.image.pixel.PixelBuilder;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -15,37 +13,20 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Image image = createImage("src/main/resources/out.png");
-
-        image.getPixels().forEach(pixel -> {
-            pixel.color.getRed().subtract(10);
-            pixel.color.getGreen().add(10);
-            pixel.color.getBlue().add(20);
-        });
-
+        Image image = createImage("src/main/resources/tijolo.png");
 
         AsciiParserConfig parserConfig = AsciiParserBuilder.startBuild()
-                .symbols("@", "#", "!", ".")
+                .symbols( "@", "$", "/", ",", ".", " ")
+                .pixelScale(4).to(1)
                 .build();
 
 
-        System.out.println();
-        FileWriter fileWriter =new FileWriter(new File("src/main/resources/out.txt"));
+        FileWriter fileWriter = new FileWriter("src/main/resources/out.txt");
         fileWriter.write(AsciiParser.parse(image, parserConfig));
         fileWriter.flush();
 
-//        image.updateCurrentPixels();
-//
-//        rewriteImage(image);
-    }
 
-    private static void rewriteImage(Image image) {
-        File imageOutput = new File("src/main/resources/out.png");
-        try {
-            ImageIO.write(image.getBufferedImage(), "png", imageOutput);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 
     private static Image createImage(String imagePath) {
