@@ -1,12 +1,12 @@
 package io.github.seujorgenochurras.image.ascii;
 
-import io.github.seujorgenochurras.image.Image;
+import io.github.seujorgenochurras.image.BetterImage;
 
 public class AsciiParser {
 
     private AsciiParser(){}
 
-    public static String parse(Image image, AsciiParserConfig parserConfig){
-        return parserConfig.parse(image);
+    public static String parse(BetterImage betterImage, AsciiParserConfig parserConfig){
+        return parserConfig.parse(betterImage);
     }
 }

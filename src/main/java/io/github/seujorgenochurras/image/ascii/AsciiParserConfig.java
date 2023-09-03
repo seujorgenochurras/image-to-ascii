@@ -1,21 +1,18 @@
 package io.github.seujorgenochurras.image.ascii;
 
-import io.github.seujorgenochurras.image.Image;
-import io.github.seujorgenochurras.image.ascii.algorithm.AsciiParserAlgorithm;
+import io.github.seujorgenochurras.image.BetterImage;
 import io.github.seujorgenochurras.util.ArrayUtils;
 
+import static io.github.seujorgenochurras.image.ascii.AsciiParserBuilder.PixelScaleConfig;
+
 public class AsciiParserConfig {
-    private final int pixelScaleBefore;
 
-    private final int pixelScaleAfter;
-
+    private final PixelScaleConfig pixelScaleConfig;
     private final String[] pixelLightSymbols;
 
-   // private final AsciiParserAlgorithm parserAlgorithm;
 
-    public AsciiParserConfig(int pixelScaleBefore, int pixelScaleAfter, String[] symbols) {
-        this.pixelScaleBefore = pixelScaleBefore;
-        this.pixelScaleAfter = pixelScaleAfter;
+    public AsciiParserConfig(PixelScaleConfig pixelScaleConfig, String[] symbols) {
+        this.pixelScaleConfig = pixelScaleConfig;
 
         this.pixelLightSymbols = ArrayUtils.reverse(symbols);
         symbolsGap = 256 / (getPixelLightSymbols().length);
@@ -34,26 +31,21 @@ public class AsciiParserConfig {
         return pixelLightSymbols[symbolIndex];
     }
 
-    String parse(Image image) {
+    String parse(BetterImage betterImage) {
         StringBuilder builder = new StringBuilder();
 
-        image.getPixels().forEach(pixel -> {
+        betterImage.getPixels().forEach(pixel -> {
             int maxBright = pixel.getBrightestPixel();
 
             String symbol = getSymbol(maxBright);
             builder.append(symbol);
 
-            if (isBorderPixel(pixel.x, image)) builder.append("\n");
+            if (isBorderPixel(pixel.x, betterImage)) builder.append("\n");
         });
         return builder.toString();
     }
-    private boolean isBorderPixel(int pixelPosition, Image image){
-
-        return pixelPosition == image.getBufferedImage().getWidth() -1;
-    }
-
-    public int getPixelScaleBefore() {
-        return pixelScaleBefore;
+    private boolean isBorderPixel(int pixelPosition, BetterImage betterImage){
+        return pixelPosition == betterImage.getBufferedImage().getWidth() -1;
     }
 
     public String[] getPixelLightSymbols() {

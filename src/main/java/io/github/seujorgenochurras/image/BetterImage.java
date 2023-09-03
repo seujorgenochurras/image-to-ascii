@@ -6,12 +6,12 @@ import io.github.seujorgenochurras.image.pixel.PixelBuilder;
 
 import java.awt.image.BufferedImage;
 
-public class Image {
+public class BetterImage {
     private final BufferedImage bufferedImage;
 
     private final ImagePixelGroup pixels;
 
-    public Image(BufferedImage bufferedImage) {
+    public BetterImage(BufferedImage bufferedImage) {
         this.bufferedImage = bufferedImage;
         pixels = PixelBuilder.build(this);
 
@@ -26,6 +26,7 @@ public class Image {
     }
     public void setPixel(ImagePixel imagePixel){
         bufferedImage.setRGB(imagePixel.x, imagePixel.y, imagePixel.color.getRGB());
+
     }
     public void setPixels(ImagePixelGroup pixels){
         pixels.forEach(this::setPixel);
