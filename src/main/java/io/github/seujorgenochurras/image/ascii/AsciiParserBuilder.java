@@ -1,6 +1,6 @@
 package io.github.seujorgenochurras.image.ascii;
 
-import io.github.seujorgenochurras.image.ascii.algorithm.AsciiParserAlgorithm;
+import io.github.seujorgenochurras.image.ascii.algorithm.PixelScaleAlgorithm;
 
 public class AsciiParserBuilder {
     private AsciiParserBuilder() {
@@ -8,11 +8,7 @@ public class AsciiParserBuilder {
 
     private String[] brightnessSymbols = {"@", "#", "!", "."};
 
-    private int pixelScaleBefore = 1;
-    private int pixelScaleAfter = 1;
-
-  //  private AsciiParserAlgorithm algorithm = AsciiParserAlgorithm.Algorithms.DEFAULT_ALGORITHM;
-
+    private PixelScaleConfig pixelScaleConfig = PixelScaleConfig.defaultConfig();
 
     public static AsciiParserBuilder startBuild() {
         return new AsciiParserBuilder();
@@ -23,28 +19,48 @@ public class AsciiParserBuilder {
         return this;
     }
 
-    public PixelScaleConfig pixelScale(int originalScale){
-        this.pixelScaleBefore = originalScale;
+    public PixelScaleConfig scaled(){
         return new PixelScaleConfig(this);
     }
 
-//    public AsciiParserBuilder algorithm(AsciiParserAlgorithm parserAlgorithm){
-//        this.algorithm = parserAlgorithm;
-//    }
-
     public AsciiParserConfig build() {
-        return new AsciiParserConfig(pixelScaleBefore, pixelScaleAfter, brightnessSymbols);
+        return new AsciiParserConfig(pixelScaleConfig, brightnessSymbols);
     }
 
     public static final class PixelScaleConfig {
         private final AsciiParserBuilder builder;
 
+        private int width;
+        private int height;
+        private PixelScaleAlgorithm pixelScaleAlgorithm = PixelScaleAlgorithm.DEFAULT;
+
+
+        private static PixelScaleConfig defaultConfig(){
+            var defaultConf = new PixelScaleConfig(null);
+            defaultConf.width = 140;
+            defaultConf.height = 100;
+            defaultConf.pixelScaleAlgorithm = PixelScaleAlgorithm.DEFAULT;
+            return defaultConf;
+        }
+
         public PixelScaleConfig(AsciiParserBuilder builder) {
             this.builder = builder;
         }
 
-        public AsciiParserBuilder to(int scale){
-            builder.pixelScaleAfter = scale;
+        public PixelScaleConfig width(int width){
+            this.width = width;
+            return this;
+        }
+        public PixelScaleConfig height(int height){
+            this.height = height;
+            return this;
+        }
+        public PixelScaleConfig algorithm(PixelScaleAlgorithm algorithm){
+            this.pixelScaleAlgorithm = algorithm;
+            return this;
+        }
+        public AsciiParserBuilder getScale(){
+            builder.pixelScaleConfig = this;
             return builder;
         }
     }
