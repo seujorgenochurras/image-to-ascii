@@ -13,8 +13,8 @@ import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        BetterImage betterImage = createImage("src/main/resources/img_1.png");
-        String[] symbols = ArrayUtils.reverse(new String[]{"@", "$", "I", "1", "/", "-", ",", ".", " "});
+        BetterImage betterImage = createImage("src/main/resources/tojolo.png");
+        String[] symbols = {"@", "$", "I", "1", "/", "-", ",", ".", " "};
 
         AsciiParserConfig parserConfig = AsciiParserBuilder.startBuild()
                 .symbols(symbols)
@@ -27,7 +27,7 @@ public class Main {
                 .build();
 
 
-        FileWriter fileWriter = new FileWriter("src/main/resources/8.txt");
+        FileWriter fileWriter = new FileWriter("src/main/resources/out.txt");
         fileWriter.write(AsciiParser.parse(betterImage, parserConfig));
         fileWriter.flush();
     }
