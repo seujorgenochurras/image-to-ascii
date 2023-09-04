@@ -1,10 +1,9 @@
 package io.github.seujorgenochurras.image.ascii.algorithm;
 
-import io.github.seujorgenochurras.image.ascii.AsciiParserBuilder;
-import io.github.seujorgenochurras.image.ascii.algorithm.std.algorithm.AsciiBrightestAlgorithm;
-import io.github.seujorgenochurras.image.ascii.algorithm.std.algorithm.AsciiDarkestPixelAlgorithm;
-import io.github.seujorgenochurras.image.ascii.algorithm.std.algorithm.AsciiHumanEyeAlgorithm;
-import io.github.seujorgenochurras.image.ascii.algorithm.std.algorithm.AsciiLightestAlgorithm;
+import io.github.seujorgenochurras.image.ascii.algorithm.pixel.AsciiBrightestAlgorithm;
+import io.github.seujorgenochurras.image.ascii.algorithm.pixel.AsciiDarkestPixelAlgorithm;
+import io.github.seujorgenochurras.image.ascii.algorithm.pixel.AsciiHumanEyeAlgorithm;
+import io.github.seujorgenochurras.image.ascii.algorithm.pixel.AsciiLightestAlgorithm;
 
 public enum AsciiAlgorithms {
     /***

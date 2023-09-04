@@ -1,4 +1,4 @@
-package io.github.seujorgenochurras.image.ascii.algorithm.std.algorithm;
+package io.github.seujorgenochurras.image.ascii.algorithm.pixel;
 
 import io.github.seujorgenochurras.image.ascii.algorithm.AsciiParserAlgorithm;
 
