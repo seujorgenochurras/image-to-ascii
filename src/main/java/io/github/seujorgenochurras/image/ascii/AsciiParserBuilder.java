@@ -1,5 +1,8 @@
 package io.github.seujorgenochurras.image.ascii;
 
+import io.github.seujorgenochurras.image.ascii.algorithm.AsciiAlgorithms;
+import io.github.seujorgenochurras.image.ascii.algorithm.AsciiParserAlgorithm;
+import io.github.seujorgenochurras.image.ascii.algorithm.PixelScale;
 import io.github.seujorgenochurras.image.ascii.algorithm.PixelScaleAlgorithm;
 
 public class AsciiParserBuilder {
@@ -8,7 +11,8 @@ public class AsciiParserBuilder {
 
     private String[] brightnessSymbols = {"@", "#", "!", "."};
 
-    private PixelScaleConfig pixelScaleConfig = PixelScaleConfig.defaultConfig();
+    private PixelScale pixelScale = new PixelScale(100, 100, PixelScaleAlgorithm.DEFAULT);
+    public AsciiParserAlgorithm algorithm = AsciiAlgorithms.LIGHTEST_PIXEL.getAlgorithm();
 
     public static AsciiParserBuilder startBuild() {
         return new AsciiParserBuilder();
@@ -23,9 +27,15 @@ public class AsciiParserBuilder {
         return new PixelScaleConfig(this);
     }
 
-    public AsciiParserConfig build() {
-        return new AsciiParserConfig(pixelScaleConfig, brightnessSymbols);
+    public AsciiParserBuilder parserAlgorithm(AsciiParserAlgorithm algorithm){
+        this.algorithm = algorithm;
+        return this;
     }
+
+    public AsciiParserConfig build() {
+        return new AsciiParserConfig(pixelScale, brightnessSymbols, algorithm);
+    }
+
 
     public static final class PixelScaleConfig {
         private final AsciiParserBuilder builder;
@@ -60,7 +70,7 @@ public class AsciiParserBuilder {
             return this;
         }
         public AsciiParserBuilder getScale(){
-            builder.pixelScaleConfig = this;
+            builder.pixelScale = new PixelScale(width, height, pixelScaleAlgorithm);
             return builder;
         }
     }

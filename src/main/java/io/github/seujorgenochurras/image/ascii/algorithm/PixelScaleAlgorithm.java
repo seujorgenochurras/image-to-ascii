@@ -7,9 +7,13 @@ public enum PixelScaleAlgorithm {
     REPLICATE(8),
     AVERAGE_PIXEL(16);
 
-    private int algorithmId;
+    private final int id;
 
-    PixelScaleAlgorithm(int algorithmId) {
-        this.algorithmId = algorithmId;
+    PixelScaleAlgorithm(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 }

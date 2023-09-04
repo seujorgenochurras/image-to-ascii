@@ -4,41 +4,32 @@ import io.github.seujorgenochurras.image.BetterImage;
 import io.github.seujorgenochurras.image.ascii.AsciiParser;
 import io.github.seujorgenochurras.image.ascii.AsciiParserBuilder;
 import io.github.seujorgenochurras.image.ascii.AsciiParserConfig;
-import io.github.seujorgenochurras.image.ascii.algorithm.PixelScaleAlgorithm;
+import io.github.seujorgenochurras.image.ascii.algorithm.AsciiAlgorithms;
+import io.github.seujorgenochurras.util.ArrayUtils;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        BetterImage betterImage = createImage("src/main/resources/tojolo.png");
-        Image scaledImage = betterImage.getBufferedImage().getScaledInstance(70, 30, Image.SCALE_SMOOTH);
-        BufferedImage scaledImageBuffer = new BufferedImage(scaledImage.getWidth(null), scaledImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-        Graphics2D scaledImageGraphics = scaledImageBuffer.createGraphics();
-        scaledImageGraphics.drawImage(scaledImage, 0, 0, null);
-        scaledImageGraphics.dispose();
-
-
-        betterImage = new BetterImage(scaledImageBuffer);
+        BetterImage betterImage = createImage("src/main/resources/img_1.png");
+        String[] symbols = ArrayUtils.reverse(new String[]{"@", "$", "I", "1", "/", "-", ",", ".", " "});
 
         AsciiParserConfig parserConfig = AsciiParserBuilder.startBuild()
-                .symbols("@", "$", "/", ",", ".", " ")
+                .symbols(symbols)
                 .scaled()
-                    .height(70)
-                    .width(100)
-                    .algorithm(PixelScaleAlgorithm.FAST)
+                .height(50)
+                .width(65)
                 .getScale()
+                .parserAlgorithm(AsciiAlgorithms.HUMAN_EYE_ALGORITHM.getAlgorithm())
 
                 .build();
 
 
-        FileWriter fileWriter = new FileWriter("src/main/resources/out.txt");
+        FileWriter fileWriter = new FileWriter("src/main/resources/8.txt");
         fileWriter.write(AsciiParser.parse(betterImage, parserConfig));
         fileWriter.flush();
-
-
     }
 
     private static BetterImage createImage(String imagePath) {
