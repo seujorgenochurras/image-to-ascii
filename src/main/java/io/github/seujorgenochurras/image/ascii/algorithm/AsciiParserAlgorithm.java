@@ -1,5 +1,6 @@
 package io.github.seujorgenochurras.image.ascii.algorithm;
 
-public class AsciiParserAlgorithm {
-
+public interface AsciiParserAlgorithm {
+    long getPixelRepresentation(int red, int green, int blue);
 }
+

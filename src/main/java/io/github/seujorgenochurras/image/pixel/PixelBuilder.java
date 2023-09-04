@@ -1,6 +1,6 @@
 package io.github.seujorgenochurras.image.pixel;
 
-import io.github.seujorgenochurras.image.Image;
+import io.github.seujorgenochurras.image.BetterImage;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -23,7 +23,7 @@ public class PixelBuilder {
         }
         return pixels;
     }
-    public static ImagePixelGroup build(Image image){
-        return build(image.getBufferedImage());
+    public static ImagePixelGroup build(BetterImage betterImage){
+        return build(betterImage.getBufferedImage());
     }
 }
