@@ -16,8 +16,9 @@ import static io.github.seujorgenochurras.util.StringUtils.getUTFChars;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        BetterImage betterImage = createImage("src/main/resources/easz.png");
-        SymbolList symbols = BestSymbolPatternFinder.findBestPattern(10, 255, getUTFChars(32, 999999));
+        BetterImage betterImage = createImage("src/main/resources/img_1.png");
+      SymbolList symbols = BestSymbolPatternFinder.findBestPattern(1, 35, getUTFChars(32, 126));
+        //SymbolList symbols = BestSymbolPatternFinder.findBestPattern(10, 255, new String[]{" ", "`", ".", "-", ":", "\"", "^", ";", "?", "r", "/", "1", "4", "3", "A", "O", "R", "6", "7", "8", "9", "@", "B", "D", "M", "Q", "W",});
 
         //SymbolList symbols = BestSymbolPatternFinder.findBestPattern(22, 255," "," ","͏","´","˙","ˆ","˚","-","¹","⁰","ª","¬","~",";","^","+","™","=",">","ſ","?","L","/","\"","ì","f","4","%","π","ý","я","9","S","E","K","&","Ё","8","0","M","D","H","N","@","Q","R","W","§","Ñ","Õ","Ø","Ŵ","ำ","Ẅ","┣","┫","╂","╉","╊","╋","","▀","▄","▌","▐","▒","▚","▞","","","▅","▋","▆","▊","▓","▙","▛","▜","▟","▉","▇","█");
       //  SymbolList symbols = BestSymbolPatternFinder.findBestPattern(0, 255," ","´","˙","ˆ","˚","-","¹","⁰","ª","¬","~",";","^","+","™","=",">","ſ","?","L","/","\"","ì","f","4","%","π","ý","я","9","S","E","K","&","Ё","8","0","M","D","H","N","@","Q","R","W","§","Ñ","Õ","Ø","Ŵ","ำ","Ẅ","┣","┫","╂","╉","╊","╋","","▀","▄","▌","▐","▒","▚","▞","","","▅","▋","▆","▊","▓","▙","▛","▜","▟","▉","▇","█");
@@ -27,8 +28,8 @@ public class Main {
         AsciiParserConfig parserConfig = AsciiParserBuilder.startBuild()
                 .symbols(symbols.getSymbolsAsStringArray())
                 .scaled()
-                    .height(500)
-                    .width(1250)
+                    .height(26)
+                    .width(60)
                     .getScale()
                 .parserAlgorithm(AsciiAlgorithms.LIGHTEST_PIXEL.getAlgorithm())
                 .reversed(false)
