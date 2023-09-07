@@ -23,7 +23,7 @@ public class SymbolList {
     public void addSymbol(Symbol symbol) {
         double newSymbolBrightness = symbol.getBrightness();
 
-        int symbolShade = (int) Math.round(newSymbolBrightness);
+        int symbolShade = (int) Math.round(newSymbolBrightness / ((double) 256 /sortedSymbols.length));
         if(sortedSymbols.length -1 < symbolShade) return;
 
 
