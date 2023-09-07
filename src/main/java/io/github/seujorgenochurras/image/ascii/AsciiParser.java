@@ -2,7 +2,6 @@ package io.github.seujorgenochurras.image.ascii;
 
 import io.github.seujorgenochurras.image.BetterImage;
 import io.github.seujorgenochurras.image.ascii.algorithm.PixelScale;
-import io.github.seujorgenochurras.util.ArrayUtils;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -12,7 +11,7 @@ public class AsciiParser {
     private AsciiParser(){}
 
     public static String parse(BetterImage betterImage, AsciiParserConfig parserConfig){
-        var pixelLightSymbols = ArrayUtils.reverse(parserConfig.symbols());
+        var pixelLightSymbols = parserConfig.symbols();
         int symbolsGap = 256 / (pixelLightSymbols.length);
 
         BetterImage scaledImage = scaleImage(betterImage, parserConfig.scale());
