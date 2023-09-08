@@ -2,17 +2,70 @@ package io.github.seujorgenochurras.image.ascii;
 
 
 import io.github.seujorgenochurras.image.ascii.algorithm.AsciiParserAlgorithm;
-import io.github.seujorgenochurras.image.ascii.algorithm.PixelScale;
+import io.github.seujorgenochurras.image.ascii.algorithm.pixel.color.AsciiColorAlgorithm;
+import io.github.seujorgenochurras.image.ascii.algorithm.pixel.scale.PixelScale;
 import io.github.seujorgenochurras.util.ArrayUtils;
 
 import java.util.Arrays;
 import java.util.Objects;
 
-public record AsciiParserConfig(PixelScale scale, String[] symbols, AsciiParserAlgorithm algorithm, boolean isSymbolReversed) {
-    @Override
-    public String[] symbols() {
+public class AsciiParserConfig {
+   private PixelScale scale;
+   private String[] symbols;
+   private AsciiParserAlgorithm algorithm;
+   private boolean isSymbolReversed;
+
+   private AsciiColorAlgorithm colorAlgorithm;
+
+    public AsciiParserConfig() {
+    }
+
+    public PixelScale getScale() {
+        return scale;
+    }
+
+    public AsciiParserConfig setScale(PixelScale scale) {
+        this.scale = scale;
+        return this;
+    }
+
+    public String[] getSymbols() {
         return isSymbolReversed? ArrayUtils.reverse(symbols) : symbols;
     }
+
+    public AsciiColorAlgorithm getColorAlgorithm() {
+        return colorAlgorithm;
+    }
+
+    public AsciiParserConfig setColorAlgorithm(AsciiColorAlgorithm colorAlgorithm) {
+        this.colorAlgorithm = colorAlgorithm;
+        return this;
+    }
+
+    public AsciiParserConfig setSymbols(String[] symbols) {
+        this.symbols = symbols;
+        return this;
+    }
+
+    public AsciiParserAlgorithm getAlgorithm() {
+        return algorithm;
+    }
+
+    public AsciiParserConfig setAlgorithm(AsciiParserAlgorithm algorithm) {
+        this.algorithm = algorithm;
+        return this;
+    }
+
+    public boolean isSymbolReversed() {
+        return isSymbolReversed;
+    }
+
+    public AsciiParserConfig setSymbolReversed(boolean symbolReversed) {
+        isSymbolReversed = symbolReversed;
+        return this;
+    }
+
+
 
     @Override
     public String toString() {

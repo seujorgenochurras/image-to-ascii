@@ -1,9 +1,6 @@
-package io.github.seujorgenochurras.image.ascii.algorithm;
+package io.github.seujorgenochurras.image.ascii.algorithm.pixel.bright;
 
-import io.github.seujorgenochurras.image.ascii.algorithm.pixel.AsciiBrightestAlgorithm;
-import io.github.seujorgenochurras.image.ascii.algorithm.pixel.AsciiDarkestPixelAlgorithm;
-import io.github.seujorgenochurras.image.ascii.algorithm.pixel.AsciiHumanEyeAlgorithm;
-import io.github.seujorgenochurras.image.ascii.algorithm.pixel.AsciiLightestAlgorithm;
+import io.github.seujorgenochurras.image.ascii.algorithm.AsciiParserAlgorithm;
 
 public enum AsciiAlgorithms {
     /***
@@ -21,6 +18,10 @@ public enum AsciiAlgorithms {
 
     DARKEST_PIXEL(new AsciiDarkestPixelAlgorithm()),
 
+    /**
+     * Uses dark magic to find the brightness of the pixel <br>
+     * Dark magic = math involving human eye cells, too much for me, just accept that it's better
+     */
     HUMAN_EYE_ALGORITHM(new AsciiHumanEyeAlgorithm());
 
     private final AsciiParserAlgorithm algorithm;
