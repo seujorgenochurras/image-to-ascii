@@ -3,7 +3,7 @@ package io.github.seujorgenochurras.color;
 import io.github.seujorgenochurras.color.symbol.Symbol;
 import io.github.seujorgenochurras.color.symbol.SymbolList;
 import io.github.seujorgenochurras.image.BetterImage;
-import io.github.seujorgenochurras.image.ascii.algorithm.AsciiAlgorithms;
+import io.github.seujorgenochurras.image.ascii.algorithm.pixel.bright.AsciiAlgorithms;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -34,10 +34,9 @@ public class BestSymbolPatternFinder {
         for (String symbol : chars) {
             g2d = image.getGraphics();
 
-            Font font = new Font("JetBrains Mono", Font.BOLD, 40);
+            Font font = new Font("Fira Mono", Font.BOLD, 40);
             g2d.setFont(font);
             FontMetrics fm = g2d.getFontMetrics();
-
 
             g2d.setColor(Color.BLACK);
             g2d.fillRect(0, 0, width, height);
@@ -68,10 +67,6 @@ public class BestSymbolPatternFinder {
             int green = color.getGreen().getColorValue();
             int blue = color.getBlue().getColorValue();
             avgPixelBrightness.addAndGet(AsciiAlgorithms.BRIGHTEST_PIXEL.getAlgorithm().getPixelRepresentation(red, green, blue));
-
-            if((red != 0 && red != 255) || (green != 0 && green != 255) || (blue != 0 && blue != 255)){
-                System.out.println(red + "," + green + "," + blue);
-            }
 
         });
         return (double) avgPixelBrightness.get() / betterImage.getPixels().size();
