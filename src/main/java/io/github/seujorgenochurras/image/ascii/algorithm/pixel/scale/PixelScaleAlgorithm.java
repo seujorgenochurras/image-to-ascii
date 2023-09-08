@@ -1,4 +1,4 @@
-package io.github.seujorgenochurras.image.ascii.algorithm;
+package io.github.seujorgenochurras.image.ascii.algorithm.pixel.scale;
 
 public enum PixelScaleAlgorithm {
     DEFAULT(1),
