@@ -1,4 +1,4 @@
-package io.github.seujorgenochurras.image.ascii.algorithm.pixel;
+package io.github.seujorgenochurras.image.ascii.algorithm.pixel.bright;
 
 import io.github.seujorgenochurras.image.ascii.algorithm.AsciiParserAlgorithm;
 import static io.github.seujorgenochurras.util.MathUtils.max;

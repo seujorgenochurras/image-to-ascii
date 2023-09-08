@@ -1,9 +1,12 @@
 package io.github.seujorgenochurras.image.ascii;
 
-import io.github.seujorgenochurras.image.ascii.algorithm.AsciiAlgorithms;
+import io.github.seujorgenochurras.image.ascii.algorithm.pixel.bright.AsciiAlgorithms;
 import io.github.seujorgenochurras.image.ascii.algorithm.AsciiParserAlgorithm;
-import io.github.seujorgenochurras.image.ascii.algorithm.PixelScale;
-import io.github.seujorgenochurras.image.ascii.algorithm.PixelScaleAlgorithm;
+import io.github.seujorgenochurras.image.ascii.algorithm.pixel.color.AsciiColorAlgorithm;
+import io.github.seujorgenochurras.image.ascii.algorithm.pixel.color.ColorType;
+import io.github.seujorgenochurras.image.ascii.algorithm.pixel.scale.PixelScale;
+import io.github.seujorgenochurras.image.ascii.algorithm.pixel.scale.PixelScaleAlgorithm;
+
 
 public class AsciiParserBuilder {
     private AsciiParserBuilder() {
@@ -12,7 +15,9 @@ public class AsciiParserBuilder {
     private String[] brightnessSymbols = {"@", "#", "!", "."};
 
     private PixelScale pixelScale = new PixelScale(100, 100, PixelScaleAlgorithm.DEFAULT);
-    public AsciiParserAlgorithm algorithm = AsciiAlgorithms.LIGHTEST_PIXEL.getAlgorithm();
+    private AsciiParserAlgorithm algorithm = AsciiAlgorithms.LIGHTEST_PIXEL.getAlgorithm();
+
+    private AsciiColorAlgorithm colorizeAlgorithm = ColorType.NONE.getAlgorithm();
 
     private boolean isSymbolReverted = false;
 
@@ -39,8 +44,20 @@ public class AsciiParserBuilder {
         return this;
     }
 
+    public  AsciiParserBuilder withColor(ColorType colorType){
+        this.colorizeAlgorithm = colorType.getAlgorithm();
+        return this;
+    }
+
     public AsciiParserConfig build() {
-        return new AsciiParserConfig(pixelScale, brightnessSymbols, algorithm, isSymbolReverted);
+
+        return new AsciiParserConfig()
+                .setScale(pixelScale)
+                .setSymbols(brightnessSymbols)
+                .setAlgorithm(algorithm)
+                .setSymbolReversed(isSymbolReverted)
+                .setColorAlgorithm(colorizeAlgorithm);
+
     }
 
 
@@ -50,15 +67,6 @@ public class AsciiParserBuilder {
         private int width;
         private int height;
         private PixelScaleAlgorithm pixelScaleAlgorithm = PixelScaleAlgorithm.DEFAULT;
-
-
-        private static PixelScaleConfig defaultConfig() {
-            var defaultConf = new PixelScaleConfig(null);
-            defaultConf.width = 140;
-            defaultConf.height = 100;
-            defaultConf.pixelScaleAlgorithm = PixelScaleAlgorithm.DEFAULT;
-            return defaultConf;
-        }
 
         public PixelScaleConfig(AsciiParserBuilder builder) {
             this.builder = builder;
