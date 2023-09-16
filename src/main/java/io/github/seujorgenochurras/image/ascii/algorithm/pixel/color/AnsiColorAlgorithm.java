@@ -1,11 +1,8 @@
 package io.github.seujorgenochurras.image.ascii.algorithm.pixel.color;
 
-import io.github.seujorgenochurras.image.ascii.algorithm.pixel.bright.AsciiHumanEyeAlgorithm;
 import io.github.seujorgenochurras.image.pixel.color.PixelColor;
 
-import java.awt.*;
-
-public class AnsiLinuxColorAlgorithm implements AsciiColorAlgorithm {
+public class AnsiColorAlgorithm implements AsciiColorAlgorithm {
 
     @Override
     public String getColorRepresentation(PixelColor color) {
