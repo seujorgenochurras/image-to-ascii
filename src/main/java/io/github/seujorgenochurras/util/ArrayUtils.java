@@ -3,9 +3,8 @@ package io.github.seujorgenochurras.util;
 import java.util.Arrays;
 
 public class ArrayUtils {
-    private ArrayUtils(){
+    private ArrayUtils(){}
 
-    }
 
     public static <T> T[]  reverse(T[] arr){
         T[] reversedArray = Arrays.copyOf(arr, arr.length);
