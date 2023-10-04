@@ -38,3 +38,5 @@ gradle
 jars
 META-INF
 out
+src/main/resources/images/*.png
+src/main/resources/images/*.jpg

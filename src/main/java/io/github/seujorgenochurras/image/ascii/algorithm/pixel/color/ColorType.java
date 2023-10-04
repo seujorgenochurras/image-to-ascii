@@ -3,7 +3,7 @@ package io.github.seujorgenochurras.image.ascii.algorithm.pixel.color;
 public enum ColorType {
 
     NONE(new NoColorAlgorithm()),
-    ANSI_LINUX(new AnsiLinuxColorAlgorithm());
+    ANSI(new AnsiColorAlgorithm());
 
     private final AsciiColorAlgorithm algorithm;
 
