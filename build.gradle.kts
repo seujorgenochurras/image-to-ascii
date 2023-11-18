@@ -12,3 +12,9 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+tasks.withType(Jar::class) {
+    manifest {
+        attributes["Manifest-Version"] = "1.0"
+        attributes["Main-Class"] = "io.github.seujorgenochurras.ScreenTest"
+    }
+}

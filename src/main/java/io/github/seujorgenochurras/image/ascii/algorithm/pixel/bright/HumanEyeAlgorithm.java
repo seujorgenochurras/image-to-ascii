@@ -1,8 +1,8 @@
 package io.github.seujorgenochurras.image.ascii.algorithm.pixel.bright;
 
-import io.github.seujorgenochurras.image.ascii.algorithm.AsciiParserAlgorithm;
+import io.github.seujorgenochurras.image.ascii.algorithm.ParserAlgorithm;
 
-public class AsciiHumanEyeAlgorithm implements AsciiParserAlgorithm {
+public class HumanEyeAlgorithm implements ParserAlgorithm {
 
     @Override
     public long getPixelRepresentation(int red, int green, int blue) {

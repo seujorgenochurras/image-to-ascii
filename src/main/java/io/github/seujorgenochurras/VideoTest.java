@@ -3,9 +3,9 @@ package io.github.seujorgenochurras;
 import io.github.seujorgenochurras.color.BestSymbolPatternFinder;
 import io.github.seujorgenochurras.image.BetterImage;
 import io.github.seujorgenochurras.image.ascii.AsciiParser;
-import io.github.seujorgenochurras.image.ascii.AsciiParserBuilder;
-import io.github.seujorgenochurras.image.ascii.AsciiParserConfig;
-import io.github.seujorgenochurras.image.ascii.algorithm.pixel.bright.AsciiAlgorithms;
+import io.github.seujorgenochurras.image.ascii.ParserBuilder;
+import io.github.seujorgenochurras.image.ascii.ParserConfig;
+import io.github.seujorgenochurras.image.ascii.algorithm.pixel.bright.Algorithms;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.color.ColorType;
 import io.github.seujorgenochurras.video.buffer.BufferedAsciiVideoParser;
 import io.github.seujorgenochurras.video.buffer.PixelAnalyzerBuffer;
@@ -26,7 +26,7 @@ public class VideoTest {
 
     public static void main(String[] args) throws InterruptedException {
         Video4j.init();
-        VideoFile videoFile = Videos.open(args[0]);
+        VideoFile videoFile = Videos.open(VIDEO_PATH);
 
         PixelAnalyzerBuffer pixelAnalyzerBuffer = new PixelAnalyzerBuffer(videoFile, 25);
 
@@ -55,13 +55,13 @@ public class VideoTest {
 
     }
 
-    private static final AsciiParserConfig parserConfig = AsciiParserBuilder.startBuild()
+    private static final ParserConfig parserConfig = ParserBuilder.startBuild()
             .symbols(symbols)
             .scaled()
             .height(80)
             .width(180)
             .getScale()
-            .parserAlgorithm(AsciiAlgorithms.HUMAN_EYE_ALGORITHM.getAlgorithm())
+            .parserAlgorithm(Algorithms.HUMAN_EYE_ALGORITHM.getAlgorithm())
             .withColor(ColorType.ANSI)
             .reversed(false)
             .build();
