@@ -1,30 +1,30 @@
 package io.github.seujorgenochurras.image.ascii;
 
 
-import io.github.seujorgenochurras.image.ascii.algorithm.AsciiParserAlgorithm;
-import io.github.seujorgenochurras.image.ascii.algorithm.pixel.color.AsciiColorAlgorithm;
+import io.github.seujorgenochurras.image.ascii.algorithm.ParserAlgorithm;
+import io.github.seujorgenochurras.image.ascii.algorithm.pixel.color.ColorAlgorithm;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.scale.PixelScale;
 import io.github.seujorgenochurras.util.ArrayUtils;
 
 import java.util.Arrays;
 import java.util.Objects;
 
-public class AsciiParserConfig {
+public class ParserConfig {
    private PixelScale scale;
    private String[] symbols;
-   private AsciiParserAlgorithm algorithm;
+   private ParserAlgorithm algorithm;
    private boolean isSymbolReversed;
 
-   private AsciiColorAlgorithm colorAlgorithm;
+   private ColorAlgorithm colorAlgorithm;
 
-    public AsciiParserConfig() {
+    public ParserConfig() {
     }
 
     public PixelScale getScale() {
         return scale;
     }
 
-    public AsciiParserConfig setScale(PixelScale scale) {
+    public ParserConfig setScale(PixelScale scale) {
         this.scale = scale;
         return this;
     }
@@ -33,25 +33,25 @@ public class AsciiParserConfig {
         return isSymbolReversed? ArrayUtils.reverse(symbols) : symbols;
     }
 
-    public AsciiColorAlgorithm getColorAlgorithm() {
+    public ColorAlgorithm getColorAlgorithm() {
         return colorAlgorithm;
     }
 
-    public AsciiParserConfig setColorAlgorithm(AsciiColorAlgorithm colorAlgorithm) {
+    public ParserConfig setColorAlgorithm(ColorAlgorithm colorAlgorithm) {
         this.colorAlgorithm = colorAlgorithm;
         return this;
     }
 
-    public AsciiParserConfig setSymbols(String[] symbols) {
+    public ParserConfig setSymbols(String[] symbols) {
         this.symbols = symbols;
         return this;
     }
 
-    public AsciiParserAlgorithm getAlgorithm() {
+    public ParserAlgorithm getAlgorithm() {
         return algorithm;
     }
 
-    public AsciiParserConfig setAlgorithm(AsciiParserAlgorithm algorithm) {
+    public ParserConfig setAlgorithm(ParserAlgorithm algorithm) {
         this.algorithm = algorithm;
         return this;
     }
@@ -60,7 +60,7 @@ public class AsciiParserConfig {
         return isSymbolReversed;
     }
 
-    public AsciiParserConfig setSymbolReversed(boolean symbolReversed) {
+    public ParserConfig setSymbolReversed(boolean symbolReversed) {
         isSymbolReversed = symbolReversed;
         return this;
     }
@@ -81,7 +81,7 @@ public class AsciiParserConfig {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AsciiParserConfig that = (AsciiParserConfig) o;
+        ParserConfig that = (ParserConfig) o;
         return isSymbolReversed == that.isSymbolReversed && Objects.equals(scale, that.scale) && Arrays.equals(symbols, that.symbols) && Objects.equals(algorithm, that.algorithm);
     }
 

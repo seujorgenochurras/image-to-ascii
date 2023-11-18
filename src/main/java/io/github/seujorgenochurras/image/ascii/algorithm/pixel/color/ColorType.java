@@ -5,13 +5,13 @@ public enum ColorType {
     NONE(new NoColorAlgorithm()),
     ANSI(new AnsiColorAlgorithm());
 
-    private final AsciiColorAlgorithm algorithm;
+    private final ColorAlgorithm algorithm;
 
-    ColorType(AsciiColorAlgorithm algorithm) {
+    ColorType(ColorAlgorithm algorithm) {
         this.algorithm = algorithm;
     }
 
-    public AsciiColorAlgorithm getAlgorithm() {
+    public ColorAlgorithm getAlgorithm() {
         return algorithm;
     }
 }
