@@ -2,7 +2,7 @@ package io.github.seujorgenochurras.image.ascii.algorithm.pixel.color;
 
 import io.github.seujorgenochurras.image.pixel.color.PixelColor;
 
-public class AnsiColorAlgorithm implements AsciiColorAlgorithm {
+public class AnsiColorAlgorithm implements ColorAlgorithm {
 
     @Override
     public String getColorRepresentation(PixelColor color) {
