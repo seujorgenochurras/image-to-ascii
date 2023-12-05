@@ -6,10 +6,14 @@ import io.github.seujorgenochurras.image.ascii.AsciiParser;
 import io.github.seujorgenochurras.image.ascii.ParserBuilder;
 import io.github.seujorgenochurras.image.ascii.ParserConfig;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.bright.Algorithms;
-import io.github.seujorgenochurras.image.ascii.algorithm.pixel.color.ColorType;
+import io.github.seujorgenochurras.image.ascii.algorithm.pixel.color.AnsiColorWithTones;
+import io.github.seujorgenochurras.image.ascii.algorithm.pixel.color.DefaultColorType;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.scale.PixelScaleAlgorithm;
+import io.github.seujorgenochurras.image.pixel.color.PixelColor;
+import io.github.seujorgenochurras.util.ArrayUtils;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,33 +22,42 @@ import java.util.ArrayList;
 import static io.github.seujorgenochurras.util.StringUtils.getUTFChars;
 
 public class Main {
-    private static final String[] symbols = BestSymbolPatternFinder.findBestPattern(1, 1500, getUTFChars(32, 8555)).getSymbolsAsStringArray();
+    //private static final String[] symbols = BestSymbolPatternFinder.findBestPattern(50, 150, getUTFChars(32, 300)).getSymbolsAsStringArray();
+    private static final String[] symbols = {"0", "1"};
 
-    public static void main(String[] args) throws IOException {
-        asciifyFile("/home/thiagoelias/Pictures/Screenshots/Screenshot from 2023-10-12 20-37-34.png");
+    private static PixelColor[] tones;
+    static {
+        ArrayList<PixelColor> tonesList = new ArrayList<>();
+        for(int g = 0; g < 0xff; g++){
+            tonesList.add(new PixelColor(new Color(0, g, 0)));
+        }
+        tones = new PixelColor[tonesList.size()-1];
+        tones = tonesList.toArray(tones);
     }
-    public static void asciifyInDir() throws IOException {
+    private static final   ParserConfig parserConfig = ParserBuilder.startBuild()
+            .parserAlgorithm(Algorithms.HUMAN_EYE_ALGORITHM.getAlgorithm())
+            .scaled()
+            .algorithm(PixelScaleAlgorithm.SMOOTH)
+            .height(30)
+            .width(60)
+            .getScale()
+            .symbols(symbols)
+            .withColor(new AnsiColorWithTones(tones))
+            .build();
+    public static void main(String[] args) throws IOException, InterruptedException {
+        asciifyInDir("/home/thiago/IdeaProjects/image-to-ascii/src/main/resources/image");
+    }
+    public static void asciifyInDir(String dirPath) throws IOException, InterruptedException {
 
-        File[] images = new File("src/main/resources/image/").listFiles();
+        File[] images = new File(dirPath).listFiles();
 
 
         for (File image : images) {
-            BetterImage betterImage = new BetterImage(ImageIO.read(image));
+            if(image.isFile()){
+                Thread.sleep(200);
 
-            ParserConfig parserConfig = ParserBuilder.startBuild()
-                    .parserAlgorithm(Algorithms.HUMAN_EYE_ALGORITHM.getAlgorithm())
-                    .scaled()
-                    .algorithm(PixelScaleAlgorithm.SMOOTH)
-                    .height(betterImage.getHeight() / 8)
-                    .width(betterImage.getWidth() / 4)
-                    .getScale()
-                    .symbols(symbols)
-                    .withColor(ColorType.ANSI)
-                    .build();
-
-            FileWriter fileWriter = new FileWriter("/home/thiagoelias/.neofetch/ascii/" + image.getName().replaceAll("png|jpg", "txt"));
-            fileWriter.write(AsciiParser.parse(betterImage, parserConfig));
-            fileWriter.flush();
+                asciifyFile(image.getAbsolutePath());
+            }
         }
     }
 
@@ -53,18 +66,8 @@ public class Main {
         File image = new File(fileName);
             BetterImage betterImage = new BetterImage(ImageIO.read(image));
 
-            ParserConfig parserConfig = ParserBuilder.startBuild()
-                    .parserAlgorithm(Algorithms.HUMAN_EYE_ALGORITHM.getAlgorithm())
-                    .scaled()
-                    .algorithm(PixelScaleAlgorithm.SMOOTH)
-                    .height(betterImage.getHeight() / 6)
-                    .width(200)
-                    .getScale()
-                    .symbols(symbols)
-                    .withColor(ColorType.ANSI)
-                    .build();
-
-            FileWriter fileWriter = new FileWriter("/home/thiagoelias/.neofetch/ascii/" + image.getName().replaceAll("png|jpg", "txt"));
+            File newFile = new File("/home/thiago/.neofetch/ascii/" + image.getName().replaceAll("png|jpg|jpeg", "txt"));
+            FileWriter fileWriter = new FileWriter(newFile);
             fileWriter.write(AsciiParser.parse(betterImage, parserConfig));
             fileWriter.flush();
     }

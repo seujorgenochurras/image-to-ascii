@@ -6,7 +6,7 @@ import io.github.seujorgenochurras.image.ascii.AsciiParser;
 import io.github.seujorgenochurras.image.ascii.ParserBuilder;
 import io.github.seujorgenochurras.image.ascii.ParserConfig;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.bright.Algorithms;
-import io.github.seujorgenochurras.image.ascii.algorithm.pixel.color.ColorType;
+import io.github.seujorgenochurras.image.ascii.algorithm.pixel.color.DefaultColorType;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -22,7 +22,7 @@ public class DefaultAsciifier {
             .width(180)
             .getScale()
             .parserAlgorithm(Algorithms.HUMAN_EYE_ALGORITHM.getAlgorithm())
-            .withColor(ColorType.ANSI)
+            .withColor(DefaultColorType.ANSI)
             .reversed(false)
             .build();
 
