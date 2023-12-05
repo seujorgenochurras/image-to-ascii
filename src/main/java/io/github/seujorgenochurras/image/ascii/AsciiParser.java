@@ -38,7 +38,7 @@ public class AsciiParser {
         return builder.toString();
     }
 
-    private static String getSymbol(int brightness, int symbolsGap, String[] pixelLightSymbols){
+    public static <T> T getSymbol(int brightness, int symbolsGap, T[] pixelLightSymbols){
         int symbolIndex = (int) (brightness / (float) symbolsGap) ;
 
         if(symbolIndex < 0 ){
