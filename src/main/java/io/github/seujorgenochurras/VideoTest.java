@@ -6,7 +6,7 @@ import io.github.seujorgenochurras.image.ascii.AsciiParser;
 import io.github.seujorgenochurras.image.ascii.ParserBuilder;
 import io.github.seujorgenochurras.image.ascii.ParserConfig;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.bright.Algorithms;
-import io.github.seujorgenochurras.image.ascii.algorithm.pixel.color.ColorType;
+import io.github.seujorgenochurras.image.ascii.algorithm.pixel.color.DefaultColorType;
 import io.github.seujorgenochurras.video.buffer.BufferedAsciiVideoParser;
 import io.github.seujorgenochurras.video.buffer.PixelAnalyzerBuffer;
 import io.metaloom.video4j.Video4j;
@@ -62,7 +62,7 @@ public class VideoTest {
             .width(180)
             .getScale()
             .parserAlgorithm(Algorithms.HUMAN_EYE_ALGORITHM.getAlgorithm())
-            .withColor(ColorType.ANSI)
+            .withColor(DefaultColorType.ANSI)
             .reversed(false)
             .build();
 

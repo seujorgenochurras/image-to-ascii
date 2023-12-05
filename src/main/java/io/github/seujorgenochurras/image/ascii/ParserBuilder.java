@@ -3,7 +3,7 @@ package io.github.seujorgenochurras.image.ascii;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.bright.Algorithms;
 import io.github.seujorgenochurras.image.ascii.algorithm.ParserAlgorithm;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.color.ColorAlgorithm;
-import io.github.seujorgenochurras.image.ascii.algorithm.pixel.color.ColorType;
+import io.github.seujorgenochurras.image.ascii.algorithm.pixel.color.DefaultColorType;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.scale.PixelScale;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.scale.PixelScaleAlgorithm;
 
@@ -17,7 +17,7 @@ public class ParserBuilder {
     private PixelScale pixelScale = new PixelScale(100, 100, PixelScaleAlgorithm.DEFAULT);
     private ParserAlgorithm algorithm = Algorithms.LIGHTEST_PIXEL.getAlgorithm();
 
-    private ColorAlgorithm colorizeAlgorithm = ColorType.NONE.getAlgorithm();
+    private ColorAlgorithm colorizeAlgorithm = DefaultColorType.NONE.getAlgorithm();
 
     private boolean isSymbolReverted = false;
 
@@ -44,8 +44,12 @@ public class ParserBuilder {
         return this;
     }
 
-    public ParserBuilder withColor(ColorType colorType){
-        this.colorizeAlgorithm = colorType.getAlgorithm();
+    public ParserBuilder withColor(DefaultColorType defaultColorType){
+        withColor(defaultColorType.getAlgorithm());
+        return this;
+    }
+    public ParserBuilder withColor(ColorAlgorithm colorAlgorithm){
+        this.colorizeAlgorithm = colorAlgorithm;
         return this;
     }
 
