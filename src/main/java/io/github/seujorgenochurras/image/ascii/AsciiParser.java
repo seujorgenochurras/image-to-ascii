@@ -10,7 +10,7 @@ public class AsciiParser {
 
     private AsciiParser(){}
 
-    public static String parse(BetterImage betterImage, AsciiParserConfig parserConfig){
+    public static String parse(BetterImage betterImage, ParserConfig parserConfig){
         var pixelLightSymbols = parserConfig.getSymbols();
         int symbolsGap = 256 / (pixelLightSymbols.length);
 
@@ -38,7 +38,7 @@ public class AsciiParser {
         return builder.toString();
     }
 
-    private static String getSymbol(int brightness, int symbolsGap, String[] pixelLightSymbols){
+    public static <T> T getSymbol(int brightness, int symbolsGap, T[] pixelLightSymbols){
         int symbolIndex = (int) (brightness / (float) symbolsGap) ;
 
         if(symbolIndex < 0 ){
