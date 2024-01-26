@@ -15,6 +15,7 @@ public class PixelBuilder {
         final int imageWidth = image.getWidth();
         final int imageHeight = image.getHeight();
 
+        //TODO Profile it and fix this massive ram drain
         for (int i = 0; i < imageHeight; i++) {
             for (int j = 0; j < imageWidth; j++) {
                 Color pixelColor = new Color(image.getRGB(j, i));

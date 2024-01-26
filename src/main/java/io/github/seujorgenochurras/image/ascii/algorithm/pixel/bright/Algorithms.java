@@ -1,12 +1,12 @@
 package io.github.seujorgenochurras.image.ascii.algorithm.pixel.bright;
 
-import io.github.seujorgenochurras.image.ascii.algorithm.AsciiParserAlgorithm;
+import io.github.seujorgenochurras.image.ascii.algorithm.ParserAlgorithm;
 
-public enum AsciiAlgorithms {
+public enum Algorithms {
     /***
      * Paints according to the rgb value that's the closest to white
      */
-    BRIGHTEST_PIXEL(new AsciiBrightestAlgorithm()),
+    BRIGHTEST_PIXEL(new BrightestAlgorithm()),
 
 
     /**
@@ -14,23 +14,23 @@ public enum AsciiAlgorithms {
      *
      * It finds the lightest pixel by getting the sum of the brightest and the darkest pixel divided by 2
      */
-    LIGHTEST_PIXEL(new AsciiLightestAlgorithm()),
+    LIGHTEST_PIXEL(new LightestAlgorithm()),
 
-    DARKEST_PIXEL(new AsciiDarkestPixelAlgorithm()),
+    DARKEST_PIXEL(new DarkestPixelAlgorithm()),
 
     /**
      * Uses dark magic to find the brightness of the pixel <br>
      * Dark magic = math involving human eye cells, too much for me, just accept that it's better
      */
-    HUMAN_EYE_ALGORITHM(new AsciiHumanEyeAlgorithm());
+    HUMAN_EYE_ALGORITHM(new HumanEyeAlgorithm());
 
-    private final AsciiParserAlgorithm algorithm;
+    private final ParserAlgorithm algorithm;
 
-    AsciiAlgorithms(AsciiParserAlgorithm algorithm){
+    Algorithms(ParserAlgorithm algorithm){
         this.algorithm = algorithm;
     }
 
-    public AsciiParserAlgorithm getAlgorithm() {
+    public ParserAlgorithm getAlgorithm() {
         return algorithm;
     }
 }

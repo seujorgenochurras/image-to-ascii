@@ -28,6 +28,13 @@ public class BetterImage {
         bufferedImage.setRGB(imagePixel.x, imagePixel.y, imagePixel.color.getRGB());
 
     }
+
+    public int getWidth(){
+        return bufferedImage.getWidth();
+    }
+    public int getHeight(){
+        return bufferedImage.getHeight();
+    }
     public void setPixels(ImagePixelGroup pixels){
         pixels.forEach(this::setPixel);
     }

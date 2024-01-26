@@ -1,17 +1,17 @@
 package io.github.seujorgenochurras.image.ascii.algorithm.pixel.color;
 
-public enum ColorType {
+public enum DefaultColorType {
 
     NONE(new NoColorAlgorithm()),
     ANSI(new AnsiColorAlgorithm());
 
-    private final AsciiColorAlgorithm algorithm;
+    private final ColorAlgorithm algorithm;
 
-    ColorType(AsciiColorAlgorithm algorithm) {
+    DefaultColorType(ColorAlgorithm algorithm) {
         this.algorithm = algorithm;
     }
 
-    public AsciiColorAlgorithm getAlgorithm() {
+    public ColorAlgorithm getAlgorithm() {
         return algorithm;
     }
 }
