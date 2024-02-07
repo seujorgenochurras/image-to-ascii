@@ -3,14 +3,28 @@ package io.github.seujorgenochurras.image.ascii;
 import io.github.seujorgenochurras.image.BetterImage;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.scale.PixelScale;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class AsciiParser {
 
     private AsciiParser() {
     }
 
+    public static String parse(String imagePath, ParserConfig parserConfig){
+        File imageFile = new File(imagePath);
+        try{
+            BetterImage betterImage = new BetterImage(ImageIO.read(imageFile));
+            return parse(betterImage, parserConfig);
+        } catch (IOException e){
+            e.printStackTrace();
+            System.err.print(e.getMessage());
+        }
+      return "AN ERROR HAPPEN WHEN CREATING THE ASCII ART";
+    }
     public static String parse(BetterImage betterImage, ParserConfig parserConfig) {
         var pixelLightSymbols = parserConfig.getSymbols();
         int symbolsGap = 256 / (pixelLightSymbols.length);
