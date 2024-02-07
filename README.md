@@ -23,12 +23,12 @@ After that, I thought for a while and had the brilliant idea of making an ASCII 
             .withColor(new AnsiColorAlgorithm())
             .build();
 
-  String asciiArt = AsciiParser.parse(imagePath, parserConfig);      
+        String asciiArt = AsciiParser.parse(imagePath, parserConfig);
 
 ```
   As you can see, there're lots of different configurations for your ASCII art, I'll list some of the most important stuff here:<br>
   - parserAlgorithm
-      - This is the algorithm that defines how to deal with brightness, basicly speaking the HUMAN_EYE_ALGORITHM is the best for humans
+      - This is the algorithm that defines how to deal with brightness, basically speaking the HUMAN_EYE_ALGORITHM is the best for humans
   - scaled
     - This is where you define if you want to scale down (or up) your image, the scale algorithm doesn't really change nothing
   - symbols
@@ -42,5 +42,5 @@ After that, I thought for a while and had the brilliant idea of making an ASCII 
   - withColor
     - This is the color algorithm, yes you read it right, we have colors.<br>
       More specifically ANSI colors, if you have no idea what ANSI is,
-      it is basically a standart on most of terminals that allows you to make some pretty awesome stuff, like playing videos with characters on your terminal or even colorize them.<br>
+      it is basically a standard on most of terminals that allows you to make some pretty awesome stuff, like playing videos with characters on your terminal or even colorize them.<br>
       for now there are only 2 colored algorithms, the normal ANSI and the ANSI with tones
