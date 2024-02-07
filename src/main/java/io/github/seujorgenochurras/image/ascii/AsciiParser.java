@@ -3,16 +3,62 @@ package io.github.seujorgenochurras.image.ascii;
 import io.github.seujorgenochurras.image.BetterImage;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.scale.PixelScale;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class AsciiParser {
 
-    private AsciiParser(){}
+    private AsciiParser() {
+    }
 
-    public static String parse(BetterImage betterImage, ParserConfig parserConfig){
+    /**
+     * Generates ASCII art from your image by going through each pixel of your image and
+     * calculating its representation according to the algorithm defined in {@link ParserConfig}.<br><br>
+     *
+     * If your ParserConfig have less than 256 symbols, the symbol representation will be defined in a symbolGap. <br>
+     * A symbolGap is how many brightness values one character might represent:<br>
+     * For instance, if you have a list with 128 symbols, then you have a symbol gap of 256 / 128 which is 2
+     * so this means that each character(symbol) represents 2 brightness units.<br>
+     * A brightness unit is defined by the shades of white to black,
+     * the maximum brightness a pixel/symbol can reach should be 255, and the minimum 0.
+     *
+     * @param imagePath image path
+     * @param parserConfig AsciiParserConfig, must be built with {@link ParserBuilder}
+     * @return ASCII art
+     */
+    public static String parse(String imagePath, ParserConfig parserConfig){
+        File imageFile = new File(imagePath);
+        try{
+            BetterImage betterImage = new BetterImage(ImageIO.read(imageFile));
+            return parse(betterImage, parserConfig);
+        } catch (IOException e){
+            e.printStackTrace();
+            System.err.print(e.getMessage());
+        }
+      return "AN ERROR HAPPEN WHEN CREATING THE ASCII ART";
+    }
+
+    /**
+     * Generates ASCII art from your image by going through each pixel of your image and
+     * calculating its representation according to the algorithm defined in {@link ParserConfig}.<br><br>
+     *
+     * If your ParserConfig have less than 256 symbols, the symbol representation will be defined in a symbolGap. <br>
+     * A symbolGap is how many brightness values one character might represent:<br>
+     * For instance, if you have a list with 128 symbols, then you have a symbol gap of 256 / 128 which is 2
+     * so this means that each character(symbol) represents 2 brightness units.<br>
+     * A brightness unit is defined by the shades of white to black,
+     * the maximum brightness a pixel/symbol can reach should be 255, and the minimum 0.
+     *
+     * @param betterImage image instance
+     * @param parserConfig AsciiParserConfig, must be built with {@link ParserBuilder}
+     * @return ASCII art
+     */
+    public static String parse(BetterImage betterImage, ParserConfig parserConfig) {
         var pixelLightSymbols = parserConfig.getSymbols();
-        int symbolsGap = 256 / (pixelLightSymbols.length);
+        int symbolsGap = 255 / pixelLightSymbols.length;
 
         BetterImage scaledImage = scaleImage(betterImage, parserConfig.getScale());
 
@@ -25,7 +71,7 @@ public class AsciiParser {
             int green = color.getGreen().getColorValue();
             int blue = color.getBlue().getColorValue();
 
-            int pixelColorRepresentation =(int) parserConfig.getAlgorithm().getPixelRepresentation(red, green, blue);
+            int pixelColorRepresentation = (int) parserConfig.getAlgorithm().getPixelRepresentation(red, green, blue);
 
             String symbol = getSymbol(pixelColorRepresentation, symbolsGap, pixelLightSymbols);
             String symbolColorRepresentation = parserConfig.getColorAlgorithm().getColorRepresentation(color);
@@ -38,23 +84,31 @@ public class AsciiParser {
         return builder.toString();
     }
 
-    public static <T> T getSymbol(int brightness, int symbolsGap, T[] pixelLightSymbols){
-        int symbolIndex = (int) (brightness / (float) symbolsGap) ;
+    /**
+     * Calculates and returns an element according to its brightness on an element array
+     * @param brightness element brightness value
+     * @param symbolsGap how many brightness units a symbol can represents  see {@link AsciiParser.parse}
+     * @param pixelLightSymbols
+     * @return
+     * @param <T>
+     */
+    public static <T> T getSymbol(int brightness, int symbolsGap, T[] pixelLightSymbols) {
+        int symbolIndex = (int) (brightness / (float) symbolsGap);
 
-        if(symbolIndex < 0 ){
+        if (symbolIndex < 0) {
             symbolIndex = 0;
-        }else if (symbolIndex > pixelLightSymbols.length -1){
-            symbolIndex = pixelLightSymbols.length -1;
+        } else if (symbolIndex > pixelLightSymbols.length - 1) {
+            symbolIndex = pixelLightSymbols.length - 1;
         }
 
         return pixelLightSymbols[symbolIndex];
     }
 
-    private static boolean isBorderPixel(int width, BetterImage betterImage){
-        return width == betterImage.getBufferedImage().getWidth() -1;
+    private static boolean isBorderPixel(int width, BetterImage betterImage) {
+        return width == betterImage.getBufferedImage().getWidth() - 1;
     }
 
-    private static BetterImage scaleImage(BetterImage image, PixelScale scale){
+    private static BetterImage scaleImage(BetterImage image, PixelScale scale) {
         int width = scale.width();
         int height = scale.height();
         int algorithm = scale.scaleAlgorithm().getId();

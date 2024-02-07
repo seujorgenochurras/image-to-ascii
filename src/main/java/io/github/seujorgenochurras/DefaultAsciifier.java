@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
 import static io.github.seujorgenochurras.util.StringUtils.getUTFChars;
 
 public class DefaultAsciifier {
-    private static final String[] symbols = BestSymbolPatternFinder.findBestPattern(1, 55, getUTFChars(32, 126)).getSymbolsAsStringArray();
+    private static final String[] symbols = BestSymbolPatternFinder.findBestPattern(1, 55, getUTFChars(32, 126)).toArray();
     public static final ParserConfig defaultParserConfig = ParserBuilder.startBuild()
             .symbols(symbols)
             .scaled()
@@ -29,25 +29,27 @@ public class DefaultAsciifier {
     public static String toAscii(BetterImage betterImage) {
         return AsciiParser.parse(betterImage, defaultParserConfig);
     }
-    public static String toAscii(Image image){
+
+    public static String toAscii(Image image) {
         return AsciiParser.parse(new BetterImage(toBufferedImage(image)), defaultParserConfig);
     }
+
     public static String toAscii(BetterImage betterImage, ParserConfig parserConfig) {
         return AsciiParser.parse(betterImage, parserConfig);
     }
-    public static String toAscii(Image image, ParserConfig parserConfig){
+
+    public static String toAscii(Image image, ParserConfig parserConfig) {
         return AsciiParser.parse(new BetterImage(toBufferedImage(image)), parserConfig);
     }
 
 
-    private static BufferedImage toBufferedImage(Image img)
-    {
-        if (img instanceof BufferedImage)
-        {
+    private static BufferedImage toBufferedImage(Image img) {
+        if (img instanceof BufferedImage) {
             return (BufferedImage) img;
         }
 
-        BufferedImage bufferedImage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+        BufferedImage bufferedImage = new BufferedImage(img.getWidth(null),
+                img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
 
         Graphics2D bGr = bufferedImage.createGraphics();
         bGr.drawImage(img, 0, 0, null);
