@@ -34,7 +34,6 @@ build/
 
 .env
 .gradle
-gradle
 jars
 META-INF
 out
