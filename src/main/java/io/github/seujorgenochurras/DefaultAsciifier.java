@@ -29,21 +29,22 @@ public class DefaultAsciifier {
     public static String toAscii(BetterImage betterImage) {
         return AsciiParser.parse(betterImage, defaultParserConfig);
     }
-    public static String toAscii(Image image){
+
+    public static String toAscii(Image image) {
         return AsciiParser.parse(new BetterImage(toBufferedImage(image)), defaultParserConfig);
     }
+
     public static String toAscii(BetterImage betterImage, ParserConfig parserConfig) {
         return AsciiParser.parse(betterImage, parserConfig);
     }
-    public static String toAscii(Image image, ParserConfig parserConfig){
+
+    public static String toAscii(Image image, ParserConfig parserConfig) {
         return AsciiParser.parse(new BetterImage(toBufferedImage(image)), parserConfig);
     }
 
 
-    private static BufferedImage toBufferedImage(Image img)
-    {
-        if (img instanceof BufferedImage)
-        {
+    private static BufferedImage toBufferedImage(Image img) {
+        if (img instanceof BufferedImage) {
             return (BufferedImage) img;
         }
 

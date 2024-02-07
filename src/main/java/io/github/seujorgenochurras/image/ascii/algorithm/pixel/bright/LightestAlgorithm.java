@@ -1,6 +1,7 @@
 package io.github.seujorgenochurras.image.ascii.algorithm.pixel.bright;
 
 import io.github.seujorgenochurras.image.ascii.algorithm.ParserAlgorithm;
+
 import static io.github.seujorgenochurras.util.MathUtils.max;
 import static io.github.seujorgenochurras.util.MathUtils.min;
 

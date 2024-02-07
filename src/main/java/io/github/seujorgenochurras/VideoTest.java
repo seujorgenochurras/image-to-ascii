@@ -23,6 +23,16 @@ public class VideoTest {
     private static final long DESIRED_FPS = 30;
 
     private static final String VIDEO_PATH = "/home/little-jhey/Desktop/projetos/ascii-test/src/main/resources/video/out.mp4";
+    private static final ParserConfig parserConfig = ParserBuilder.startBuild()
+            .symbols(symbols)
+            .scaled()
+            .height(80)
+            .width(180)
+            .getScale()
+            .parserAlgorithm(Algorithms.HUMAN_EYE_ALGORITHM.getAlgorithm())
+            .withColor(DefaultColorType.ANSI)
+            .reversed(false)
+            .build();
 
     public static void main(String[] args) throws InterruptedException {
         Video4j.init();
@@ -32,7 +42,7 @@ public class VideoTest {
 
         pixelAnalyzerBuffer.startQueue();
 
-        var bufferedAsciiVideoParser = new BufferedAsciiVideoParser(parserConfig, pixelAnalyzerBuffer,10);
+        var bufferedAsciiVideoParser = new BufferedAsciiVideoParser(parserConfig, pixelAnalyzerBuffer, 10);
 
         bufferedAsciiVideoParser.startQueue();
 
@@ -40,7 +50,7 @@ public class VideoTest {
         Thread.sleep(5000);
         long videoLength = pixelAnalyzerBuffer.getVideoFileLength();
         new Thread(() -> {
-            for(int i = 0; i < videoLength; i++){
+            for (int i = 0; i < videoLength; i++) {
                 try {
                     Thread.sleep(1000 / DESIRED_FPS);
                 } catch (InterruptedException e) {
@@ -54,17 +64,6 @@ public class VideoTest {
         }).start();
 
     }
-
-    private static final ParserConfig parserConfig = ParserBuilder.startBuild()
-            .symbols(symbols)
-            .scaled()
-            .height(80)
-            .width(180)
-            .getScale()
-            .parserAlgorithm(Algorithms.HUMAN_EYE_ALGORITHM.getAlgorithm())
-            .withColor(DefaultColorType.ANSI)
-            .reversed(false)
-            .build();
 
     public static String toAscii(BetterImage betterImage) {
         return AsciiParser.parse(betterImage, parserConfig);

@@ -8,7 +8,7 @@ public class Blue extends ModifiableColor {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return String.valueOf(colorValue);
     }
 }

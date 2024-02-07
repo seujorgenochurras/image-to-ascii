@@ -11,7 +11,7 @@ public enum Algorithms {
 
     /**
      * Paints according to the rgb value that's the lightest
-     *
+     * <p>
      * It finds the lightest pixel by getting the sum of the brightest and the darkest pixel divided by 2
      */
     LIGHTEST_PIXEL(new LightestAlgorithm()),
@@ -26,7 +26,7 @@ public enum Algorithms {
 
     private final ParserAlgorithm algorithm;
 
-    Algorithms(ParserAlgorithm algorithm){
+    Algorithms(ParserAlgorithm algorithm) {
         this.algorithm = algorithm;
     }
 

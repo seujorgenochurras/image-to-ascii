@@ -10,12 +10,12 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class ParserConfig {
-   private PixelScale scale;
-   private String[] symbols;
-   private ParserAlgorithm algorithm;
-   private boolean isSymbolReversed;
+    private PixelScale scale;
+    private String[] symbols;
+    private ParserAlgorithm algorithm;
+    private boolean isSymbolReversed;
 
-   private ColorAlgorithm colorAlgorithm;
+    private ColorAlgorithm colorAlgorithm;
 
     public ParserConfig() {
     }
@@ -30,7 +30,12 @@ public class ParserConfig {
     }
 
     public String[] getSymbols() {
-        return isSymbolReversed? ArrayUtils.reverse(symbols) : symbols;
+        return isSymbolReversed ? ArrayUtils.reverse(symbols) : symbols;
+    }
+
+    public ParserConfig setSymbols(String[] symbols) {
+        this.symbols = symbols;
+        return this;
     }
 
     public ColorAlgorithm getColorAlgorithm() {
@@ -39,11 +44,6 @@ public class ParserConfig {
 
     public ParserConfig setColorAlgorithm(ColorAlgorithm colorAlgorithm) {
         this.colorAlgorithm = colorAlgorithm;
-        return this;
-    }
-
-    public ParserConfig setSymbols(String[] symbols) {
-        this.symbols = symbols;
         return this;
     }
 
@@ -64,7 +64,6 @@ public class ParserConfig {
         isSymbolReversed = symbolReversed;
         return this;
     }
-
 
 
     @Override
