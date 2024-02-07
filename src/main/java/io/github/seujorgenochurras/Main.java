@@ -9,18 +9,33 @@ import io.github.seujorgenochurras.image.ascii.algorithm.pixel.bright.Algorithms
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.color.AnsiColorAlgorithm;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.scale.PixelScaleAlgorithm;
 import io.github.seujorgenochurras.image.pixel.color.PixelColor;
+import io.github.seujorgenochurras.util.StringUtils;
 
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 
 import static io.github.seujorgenochurras.util.StringUtils.getUTFChars;
 
 public class Main {
-    private static final String[] symbols = BestSymbolPatternFinder.findBestPattern(3, 150, getUTFChars(32, 1632)).getSymbolsAsStringArray();
+    private static final int maxSymbols = 150;
+    private static final String[] unorderedSymbols = StringUtils.getUTFChars(32, 1600);
+    private static final String[] symbols = BestSymbolPatternFinder.findBestPattern(maxSymbols, unorderedSymbols).toArray();
     //private static final String[] symbols = {"L", "U", "C", "A", "S"};
-    private static final ParserConfig parserConfig = ParserBuilder.startBuild().parserAlgorithm(Algorithms.HUMAN_EYE_ALGORITHM.getAlgorithm()).scaled().algorithm(PixelScaleAlgorithm.SMOOTH).height(30).width(80).getScale().symbols(symbols).withColor(new AnsiColorAlgorithm()).build();
+
+
+    private static final ParserConfig parserConfig = ParserBuilder.startBuild()
+            .parserAlgorithm(Algorithms.BRIGHTEST_PIXEL.getAlgorithm())
+            .scaled()
+            .algorithm(PixelScaleAlgorithm.SMOOTH)
+            .height(30)
+            .width(80)
+            .getScale()
+            .symbols(symbols)
+            .withColor(new AnsiColorAlgorithm())
+            .build();
     private static PixelColor[] tones;
 
     static {
@@ -33,7 +48,8 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-        asciifyFile("/home/thiago/Desktop/projects/image-to-ascii/src/main/resources/img_4.png");
+        System.out.println(Arrays.toString(symbols));
+        asciifyFile("/home/thiago/Desktop/projects/image-to-ascii/src/main/resources/image/jorge.png");
 
 
         //   asciifyInDir("/home/thiago/IdeaProjects/image-to-ascii/src/main/resources/image");
@@ -58,7 +74,6 @@ public class Main {
         File image = new File(fileName);
         BetterImage betterImage = new BetterImage(ImageIO.read(image));
 
-        //File newFile = new File("/home/thiago/.neofetch/ascii/" + image.getName().replaceAll("png|jpg|jpeg", "txt"));
         File newFile = new File("/home/thiago/Desktop/projects/image-to-ascii/src/main/resources/" + image.getName().replaceAll("png|jpg|jpeg", "txt"));
         FileWriter fileWriter = new FileWriter(newFile);
         fileWriter.write(AsciiParser.parse(betterImage, parserConfig));

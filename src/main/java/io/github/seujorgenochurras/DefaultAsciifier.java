@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
 import static io.github.seujorgenochurras.util.StringUtils.getUTFChars;
 
 public class DefaultAsciifier {
-    private static final String[] symbols = BestSymbolPatternFinder.findBestPattern(1, 55, getUTFChars(32, 126)).getSymbolsAsStringArray();
+    private static final String[] symbols = BestSymbolPatternFinder.findBestPattern(1, 55, getUTFChars(32, 126)).toArray();
     public static final ParserConfig defaultParserConfig = ParserBuilder.startBuild()
             .symbols(symbols)
             .scaled()
@@ -48,7 +48,8 @@ public class DefaultAsciifier {
             return (BufferedImage) img;
         }
 
-        BufferedImage bufferedImage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+        BufferedImage bufferedImage = new BufferedImage(img.getWidth(null),
+                img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
 
         Graphics2D bGr = bufferedImage.createGraphics();
         bGr.drawImage(img, 0, 0, null);

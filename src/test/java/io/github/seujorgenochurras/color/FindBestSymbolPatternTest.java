@@ -10,6 +10,6 @@ class FindBestSymbolPatternTest {
     void isFindingBestPattern(){
         var symbols = BestSymbolPatternFinder.findBestPattern(10, 110, getUTFChars(32, 126));
         String[] expectedSymbols = {" ", "`", "'", ",", ":", "^", "*", "+", "-", ".", "r", ")", "/", "a", "E", "p", "G", "0", "1", "2", "3", "9", "@", "A", "B", "D", "H", "M", "W"};
-        assertEquals(expectedSymbols, symbols.getSymbolsAsStringArray());
+        assertEquals(expectedSymbols, symbols.toArray());
     }
 }

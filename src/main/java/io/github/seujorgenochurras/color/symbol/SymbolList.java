@@ -55,7 +55,7 @@ public class SymbolList {
         return sortedSymbols;
     }
 
-    public String[] getSymbolsAsStringArray() {
+    public String[] toArray() {
         List<String> stringList = new ArrayList<>();
 
         for (int i = 0; i < sortedSymbols.length - 1; i++) {

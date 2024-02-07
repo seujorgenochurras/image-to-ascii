@@ -18,7 +18,7 @@ import static io.github.seujorgenochurras.util.StringUtils.getUTFChars;
 public class VideoTest {
 
 
-    private static final String[] symbols = BestSymbolPatternFinder.findBestPattern(1, 55, getUTFChars(32, 126)).getSymbolsAsStringArray();
+    private static final String[] symbols = BestSymbolPatternFinder.findBestPattern(1, 55, getUTFChars(32, 126)).toArray();
 
     private static final long DESIRED_FPS = 30;
 

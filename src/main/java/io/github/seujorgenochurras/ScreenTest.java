@@ -13,7 +13,7 @@ import static io.github.seujorgenochurras.util.StringUtils.getUTFChars;
 
 public class ScreenTest {
     public static final String[] symbols = BestSymbolPatternFinder.
-            findBestPattern(1, 55, getUTFChars(32, 126)).getSymbolsAsStringArray();
+            findBestPattern(1, 55, getUTFChars(32, 126)).toArray();
 
     public static final ParserConfig defaultParserConfig = ParserBuilder.startBuild()
             .symbols(symbols)
