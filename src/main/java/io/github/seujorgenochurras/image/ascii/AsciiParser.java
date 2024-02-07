@@ -14,6 +14,21 @@ public class AsciiParser {
     private AsciiParser() {
     }
 
+    /**
+     * Generates ASCII art from your image by going through each pixel of your image and
+     * calculating its representation according to the algorithm defined in {@link ParserConfig}.<br><br>
+     *
+     * If your ParserConfig have less than 256 symbols, the symbol representation will be defined in a symbolGap. <br>
+     * A symbolGap is how many brightness values one character might represent:<br>
+     * For instance, if you have a list with 128 symbols, then you have a symbol gap of 256 / 128 which is 2
+     * so this means that each character(symbol) represents 2 brightness units.<br>
+     * A brightness unit is defined by the shades of white to black,
+     * the maximum brightness a pixel/symbol can reach should be 255, and the minimum 0.
+     *
+     * @param imagePath image path
+     * @param parserConfig AsciiParserConfig, must be built with {@link ParserBuilder}
+     * @return ASCII art
+     */
     public static String parse(String imagePath, ParserConfig parserConfig){
         File imageFile = new File(imagePath);
         try{
@@ -25,9 +40,25 @@ public class AsciiParser {
         }
       return "AN ERROR HAPPEN WHEN CREATING THE ASCII ART";
     }
+
+    /**
+     * Generates ASCII art from your image by going through each pixel of your image and
+     * calculating its representation according to the algorithm defined in {@link ParserConfig}.<br><br>
+     *
+     * If your ParserConfig have less than 256 symbols, the symbol representation will be defined in a symbolGap. <br>
+     * A symbolGap is how many brightness values one character might represent:<br>
+     * For instance, if you have a list with 128 symbols, then you have a symbol gap of 256 / 128 which is 2
+     * so this means that each character(symbol) represents 2 brightness units.<br>
+     * A brightness unit is defined by the shades of white to black,
+     * the maximum brightness a pixel/symbol can reach should be 255, and the minimum 0.
+     *
+     * @param betterImage image instance
+     * @param parserConfig AsciiParserConfig, must be built with {@link ParserBuilder}
+     * @return ASCII art
+     */
     public static String parse(BetterImage betterImage, ParserConfig parserConfig) {
         var pixelLightSymbols = parserConfig.getSymbols();
-        int symbolsGap = 256 / (pixelLightSymbols.length);
+        int symbolsGap = 255 / pixelLightSymbols.length;
 
         BetterImage scaledImage = scaleImage(betterImage, parserConfig.getScale());
 
@@ -53,6 +84,14 @@ public class AsciiParser {
         return builder.toString();
     }
 
+    /**
+     * Calculates and returns an element according to its brightness on an element array
+     * @param brightness element brightness value
+     * @param symbolsGap how many brightness units a symbol can represents  see {@link AsciiParser.parse}
+     * @param pixelLightSymbols
+     * @return
+     * @param <T>
+     */
     public static <T> T getSymbol(int brightness, int symbolsGap, T[] pixelLightSymbols) {
         int symbolIndex = (int) (brightness / (float) symbolsGap);
 

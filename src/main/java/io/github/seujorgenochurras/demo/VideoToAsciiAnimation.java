@@ -1,4 +1,4 @@
-package io.github.seujorgenochurras;
+package io.github.seujorgenochurras.demo;
 
 import io.github.seujorgenochurras.color.BestSymbolPatternFinder;
 import io.github.seujorgenochurras.image.BetterImage;
@@ -15,7 +15,7 @@ import io.metaloom.video4j.Videos;
 
 import static io.github.seujorgenochurras.util.StringUtils.getUTFChars;
 
-public class VideoTest {
+public class VideoToAsciiAnimation {
 
 
     private static final String[] symbols = BestSymbolPatternFinder.findBestPattern(1, 55, getUTFChars(32, 126)).toArray();
