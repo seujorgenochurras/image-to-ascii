@@ -10,7 +10,7 @@ After that, I thought for a while and had the brilliant idea of making an ASCII 
 # How do I do it?
   You should probably take a look at the code first:<br>
   ```java
-    private static final String[] symbols = {"L", "U", "C", "A", "S"};
+    private static final String[] symbols = {" ", ".", "-", "I", "W", "@"};
 
     private static final ParserConfig parserConfig = ParserBuilder.startBuild()
             .parserAlgorithm(Algorithms.HUMAN_EYE_ALGORITHM.getAlgorithm())
@@ -40,6 +40,7 @@ After that, I thought for a while and had the brilliant idea of making an ASCII 
       ```
   
   - withColor
-    - This is the color algorithm, yes you read it right, we have colors. More specifically ANSI colors, if you have no idea what ANSI is,
+    - This is the color algorithm, yes you read it right, we have colors.<br>
+      More specifically ANSI colors, if you have no idea what ANSI is,
       it is basically a standart on most of terminals that allows you to make some pretty awesome stuff, like playing videos with characters on your terminal or even colorize them.<br>
       for now there are only 2 colored algorithms, the normal ANSI and the ANSI with tones
