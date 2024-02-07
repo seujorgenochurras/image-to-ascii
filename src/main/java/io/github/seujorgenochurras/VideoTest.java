@@ -22,7 +22,7 @@ public class VideoTest {
 
     private static final long DESIRED_FPS = 30;
 
-    private static final String VIDEO_PATH = "/home/little-jhey/Desktop/projetos/ascii-test/src/main/resources/video/meupau.mp4";
+    private static final String VIDEO_PATH = "/home/little-jhey/Desktop/projetos/ascii-test/src/main/resources/video/out.mp4";
 
     public static void main(String[] args) throws InterruptedException {
         Video4j.init();
