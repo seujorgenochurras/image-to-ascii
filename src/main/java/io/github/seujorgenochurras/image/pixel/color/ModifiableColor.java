@@ -17,28 +17,32 @@ public abstract class ModifiableColor {
         return this;
     }
 
-    private void validateAndHandleCurrentColor(){
-        if(colorValue > 255){
+    private void validateAndHandleCurrentColor() {
+        if (colorValue > 255) {
             this.colorValue = 255;
             return;
         }
-        if(colorValue < 0){
+        if (colorValue < 0) {
             this.colorValue = 0;
         }
     }
-    public void add(int amount){
+
+    public void add(int amount) {
         this.colorValue += amount;
         validateAndHandleCurrentColor();
     }
-    public void subtract(int amount){
+
+    public void subtract(int amount) {
         this.colorValue -= amount;
         validateAndHandleCurrentColor();
     }
-    public void divide(double divisor){
+
+    public void divide(double divisor) {
         this.colorValue /= divisor;
         validateAndHandleCurrentColor();
     }
-    public void multiply(double multiplier){
+
+    public void multiply(double multiplier) {
         this.colorValue *= multiplier;
         validateAndHandleCurrentColor();
     }

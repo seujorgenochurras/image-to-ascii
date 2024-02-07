@@ -10,7 +10,7 @@ public class AnsiColorWithTones implements ColorAlgorithm {
     private final PixelColor[] tones;
 
     /***
-     * shorted automatically from brightest to darkest
+     * sorted automatically from brightest to darkest
      * @param tones
      */
     public AnsiColorWithTones(PixelColor... tones) {

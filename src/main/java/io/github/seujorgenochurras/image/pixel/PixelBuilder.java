@@ -24,7 +24,8 @@ public class PixelBuilder {
         }
         return pixels;
     }
-    public static ImagePixelGroup build(BetterImage betterImage){
+
+    public static ImagePixelGroup build(BetterImage betterImage) {
         return build(betterImage.getBufferedImage());
     }
 }

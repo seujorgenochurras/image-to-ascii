@@ -11,6 +11,7 @@ public class PixelAnalyzerBuffer {
     private final VideoFile videoFile;
 
     private final int maxBufferedPixels;
+    private final Queue<BetterImage> pixelGroupQueue = new LinkedBlockingQueue<>();
 
     public PixelAnalyzerBuffer(VideoFile videoFile) {
         this.videoFile = videoFile;
@@ -22,11 +23,10 @@ public class PixelAnalyzerBuffer {
         this.maxBufferedPixels = maxBufferedPixels;
     }
 
-    private final Queue<BetterImage> pixelGroupQueue = new LinkedBlockingQueue<>();
     public void startQueue() {
         new Thread(() -> {
             while (videoFile.currentFrame() < videoFile.length()) {
-                if(pixelGroupQueue.size() >= maxBufferedPixels){
+                if (pixelGroupQueue.size() >= maxBufferedPixels) {
                     continue;
                 }
                 BetterImage betterImage = new BetterImage(videoFile.frameToImage());
@@ -39,7 +39,7 @@ public class PixelAnalyzerBuffer {
         return pixelGroupQueue;
     }
 
-    public long getVideoFileLength(){
+    public long getVideoFileLength() {
         return videoFile.length();
     }
 

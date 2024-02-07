@@ -12,9 +12,10 @@ import java.util.concurrent.atomic.AtomicLong;
 public class BestSymbolPatternFinder {
 
 
-    public static SymbolList findBestPattern(String ...chars){
+    public static SymbolList findBestPattern(String... chars) {
         return findBestPattern(255, chars);
     }
+
     public static SymbolList findBestPattern(int maxSymbols, String... chars) {
         return findBestPattern(10, maxSymbols, chars);
     }
