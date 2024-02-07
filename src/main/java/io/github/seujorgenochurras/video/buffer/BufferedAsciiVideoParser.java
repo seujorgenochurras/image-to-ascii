@@ -36,7 +36,7 @@ public class BufferedAsciiVideoParser {
             while (currentFrame < pixelAnalyzerBuffer.getVideoFileLength()) {
 
                 BetterImage frame = framesQueue.peek();
-                if(frame == null || (asciiArtQueue.size() >= maxBufferedFrames)) {
+                if (frame == null || (asciiArtQueue.size() >= maxBufferedFrames)) {
                     continue;
                 }
                 asciiArtQueue.offer(AsciiParser.parse(framesQueue.poll(), parserConfig));

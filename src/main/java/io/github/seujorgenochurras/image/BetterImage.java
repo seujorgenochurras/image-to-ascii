@@ -21,25 +21,28 @@ public class BetterImage {
         return bufferedImage;
     }
 
-    public void updateCurrentPixels(){
+    public void updateCurrentPixels() {
         this.setPixels(pixels);
     }
-    public void setPixel(ImagePixel imagePixel){
+
+    public void setPixel(ImagePixel imagePixel) {
         bufferedImage.setRGB(imagePixel.x, imagePixel.y, imagePixel.color.getRGB());
 
     }
 
-    public int getWidth(){
+    public int getWidth() {
         return bufferedImage.getWidth();
     }
-    public int getHeight(){
+
+    public int getHeight() {
         return bufferedImage.getHeight();
-    }
-    public void setPixels(ImagePixelGroup pixels){
-        pixels.forEach(this::setPixel);
     }
 
     public ImagePixelGroup getPixels() {
         return pixels;
+    }
+
+    public void setPixels(ImagePixelGroup pixels) {
+        pixels.forEach(this::setPixel);
     }
 }

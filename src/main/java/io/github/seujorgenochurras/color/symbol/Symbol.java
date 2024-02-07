@@ -4,6 +4,11 @@ public class Symbol {
     private String data;
     private double brightness;
 
+    public Symbol(String data, double brightness) {
+        this.data = data;
+        this.brightness = brightness;
+    }
+
     public String getData() {
         return data;
     }
@@ -20,11 +25,6 @@ public class Symbol {
     public Symbol setBrightness(double brightness) {
         this.brightness = brightness;
         return this;
-    }
-
-    public Symbol(String data, double brightness) {
-        this.data = data;
-        this.brightness = brightness;
     }
 
     @Override

@@ -8,9 +8,10 @@ import java.awt.image.BufferedImage;
 
 public class AsciiParser {
 
-    private AsciiParser(){}
+    private AsciiParser() {
+    }
 
-    public static String parse(BetterImage betterImage, ParserConfig parserConfig){
+    public static String parse(BetterImage betterImage, ParserConfig parserConfig) {
         var pixelLightSymbols = parserConfig.getSymbols();
         int symbolsGap = 256 / (pixelLightSymbols.length);
 
@@ -25,7 +26,7 @@ public class AsciiParser {
             int green = color.getGreen().getColorValue();
             int blue = color.getBlue().getColorValue();
 
-            int pixelColorRepresentation =(int) parserConfig.getAlgorithm().getPixelRepresentation(red, green, blue);
+            int pixelColorRepresentation = (int) parserConfig.getAlgorithm().getPixelRepresentation(red, green, blue);
 
             String symbol = getSymbol(pixelColorRepresentation, symbolsGap, pixelLightSymbols);
             String symbolColorRepresentation = parserConfig.getColorAlgorithm().getColorRepresentation(color);
@@ -38,23 +39,23 @@ public class AsciiParser {
         return builder.toString();
     }
 
-    public static <T> T getSymbol(int brightness, int symbolsGap, T[] pixelLightSymbols){
-        int symbolIndex = (int) (brightness / (float) symbolsGap) ;
+    public static <T> T getSymbol(int brightness, int symbolsGap, T[] pixelLightSymbols) {
+        int symbolIndex = (int) (brightness / (float) symbolsGap);
 
-        if(symbolIndex < 0 ){
+        if (symbolIndex < 0) {
             symbolIndex = 0;
-        }else if (symbolIndex > pixelLightSymbols.length -1){
-            symbolIndex = pixelLightSymbols.length -1;
+        } else if (symbolIndex > pixelLightSymbols.length - 1) {
+            symbolIndex = pixelLightSymbols.length - 1;
         }
 
         return pixelLightSymbols[symbolIndex];
     }
 
-    private static boolean isBorderPixel(int width, BetterImage betterImage){
-        return width == betterImage.getBufferedImage().getWidth() -1;
+    private static boolean isBorderPixel(int width, BetterImage betterImage) {
+        return width == betterImage.getBufferedImage().getWidth() - 1;
     }
 
-    private static BetterImage scaleImage(BetterImage image, PixelScale scale){
+    private static BetterImage scaleImage(BetterImage image, PixelScale scale) {
         int width = scale.width();
         int height = scale.height();
         int algorithm = scale.scaleAlgorithm().getId();

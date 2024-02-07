@@ -7,6 +7,6 @@ import static io.github.seujorgenochurras.util.MathUtils.max;
 public class BrightestAlgorithm implements ParserAlgorithm {
     @Override
     public long getPixelRepresentation(int red, int green, int blue) {
-       return max(red, blue, green);
+        return max(red, blue, green);
     }
 }
