@@ -6,7 +6,6 @@ import io.github.seujorgenochurras.image.ascii.AsciiParser;
 import io.github.seujorgenochurras.image.ascii.ParserBuilder;
 import io.github.seujorgenochurras.image.ascii.ParserConfig;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.color.DefaultColorType;
-import org.jetbrains.annotations.Nullable;
 
 import static io.github.seujorgenochurras.util.StringUtils.getUTFChars;
 
@@ -28,7 +27,7 @@ public class DefaultAsciifier {
     }
 
 
-    public static String toAscii(String imagePath, int height, int width, @Nullable Boolean withAnsiColor) {
+    public static String toAscii(String imagePath, int height, int width, boolean withAnsiColor) {
         ParserBuilder parserBuilder = ParserBuilder.startBuild()
                 .symbols(symbols)
                 .scaled()

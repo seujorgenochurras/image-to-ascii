@@ -5,7 +5,7 @@ plugins {
 }
 
 val currentGroup = "io.github.seujorgenochurras"
-val currentVersion = "0.0.1"
+val currentVersion = "0.0.2"
 
 repositories {
     mavenCentral()
