@@ -44,7 +44,10 @@ public class ParserBuilder {
         this.algorithm = algorithm;
         return this;
     }
-
+    public ParserBuilder parserAlgorithm(Algorithms algorithm) {
+        this.algorithm = algorithm.getAlgorithm();
+        return this;
+    }
     public ParserBuilder reversed(boolean isSymbolWhiteToBlack) {
         this.isSymbolReverted = isSymbolWhiteToBlack;
         return this;
