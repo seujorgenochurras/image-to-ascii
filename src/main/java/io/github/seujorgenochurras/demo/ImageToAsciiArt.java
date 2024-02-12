@@ -17,15 +17,14 @@ import java.io.IOException;
 
 import static io.github.seujorgenochurras.util.StringUtils.getUTFChars;
 
-public class ImageToAsciiARt {
-    private static final int maxSymbols = 255;
+public class ImageToAsciiArt {
 
     private static final String[] unorderedSymbols = getUTFChars(32, 123);
-    private static final String[] symbols = BestSymbolPatternFinder.findBestPattern(1, maxSymbols, unorderedSymbols).toArray();
+    private static final String[] symbols = BestSymbolPatternFinder.findBestPattern(1, unorderedSymbols).toArray();
 
 
     private static final ParserConfig parserConfig = ParserBuilder.startBuild()
-            .parserAlgorithm(Algorithms.HUMAN_EYE_ALGORITHM.getAlgorithm())
+            .parserAlgorithm(Algorithms.HUMAN_EYE_ALGORITHM)
             .scaled()
                 .algorithm(PixelScaleAlgorithm.SMOOTH)
                 .height(50)
@@ -37,7 +36,7 @@ public class ImageToAsciiARt {
     private static PixelColor[] tones;
 
     public static void main(String[] args) throws IOException {
-        asciifyFile("/home/thiago/Desktop/projects/image-to-ascii/src/main/resources/image/jorge.png");
+        asciifyFile("src/main/resources/image/jorge.png");
     }
 
     public static void asciifyFile(String fileName) throws IOException {
