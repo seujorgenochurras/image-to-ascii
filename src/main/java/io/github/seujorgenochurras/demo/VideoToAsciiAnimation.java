@@ -30,7 +30,7 @@ public class VideoToAsciiAnimation {
             .width(180)
             .getScale()
             .parserAlgorithm(Algorithms.HUMAN_EYE_ALGORITHM.getAlgorithm())
-            .withColor(DefaultColorType.ANSI)
+            .colorAlgorithm(DefaultColorType.ANSI)
             .reversed(false)
             .build();
 
