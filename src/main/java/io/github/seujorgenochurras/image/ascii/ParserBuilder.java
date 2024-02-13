@@ -11,7 +11,7 @@ import io.github.seujorgenochurras.image.ascii.algorithm.pixel.scale.PixelScaleA
 public class ParserBuilder {
     private String[] brightnessSymbols = {"@", "#", "!", "."};
     private PixelScale pixelScale = new PixelScale(100, 100, PixelScaleAlgorithm.DEFAULT);
-    private ParserAlgorithm algorithm = Algorithms.LIGHTEST_PIXEL.getAlgorithm();
+    private ParserAlgorithm algorithm = Algorithms.HUMAN_EYE_ALGORITHM.getAlgorithm();
     private ColorAlgorithm colorizeAlgorithm = DefaultColorType.NONE.getAlgorithm();
     private boolean isSymbolReverted = false;
 
@@ -44,14 +44,17 @@ public class ParserBuilder {
         this.algorithm = algorithm;
         return this;
     }
-
+    public ParserBuilder parserAlgorithm(Algorithms algorithm) {
+        this.algorithm = algorithm.getAlgorithm();
+        return this;
+    }
     public ParserBuilder reversed(boolean isSymbolWhiteToBlack) {
         this.isSymbolReverted = isSymbolWhiteToBlack;
         return this;
     }
 
-    public ParserBuilder withColor(DefaultColorType defaultColorType) {
-        withColor(defaultColorType.getAlgorithm());
+    public ParserBuilder colorAlgorithm(DefaultColorType defaultColorType) {
+        colorAlgorithm(defaultColorType.getAlgorithm());
         return this;
     }
 
@@ -60,7 +63,7 @@ public class ParserBuilder {
      * @param colorAlgorithm the algorithm to colorize your characters
      * @return builder
      */
-    public ParserBuilder withColor(ColorAlgorithm colorAlgorithm) {
+    public ParserBuilder colorAlgorithm(ColorAlgorithm colorAlgorithm) {
         this.colorizeAlgorithm = colorAlgorithm;
         return this;
     }

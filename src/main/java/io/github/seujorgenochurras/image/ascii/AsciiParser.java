@@ -14,20 +14,9 @@ public class AsciiParser {
     private AsciiParser() {
     }
 
+
     /**
-     * Generates ASCII art from your image by going through each pixel of your image and
-     * calculating its representation according to the algorithm defined in {@link ParserConfig}.<br><br>
-     *
-     * If your ParserConfig have less than 256 symbols, the symbol representation will be defined in a symbolGap. <br>
-     * A symbolGap is how many brightness values one character might represent:<br>
-     * For instance, if you have a list with 128 symbols, then you have a symbol gap of 256 / 128 which is 2
-     * so this means that each character(symbol) represents 2 brightness units.<br>
-     * A brightness unit is defined by the shades of white to black,
-     * the maximum brightness a pixel/symbol can reach should be 255, and the minimum 0.
-     *
-     * @param imagePath image path
-     * @param parserConfig AsciiParserConfig, must be built with {@link ParserBuilder}
-     * @return ASCII art
+     * Overloaded method of {@link AsciiParser#parse(BetterImage, ParserConfig)}
      */
     public static String parse(String imagePath, ParserConfig parserConfig){
         File imageFile = new File(imagePath);
@@ -37,20 +26,20 @@ public class AsciiParser {
         } catch (IOException e){
             e.printStackTrace();
             System.err.print(e.getMessage());
+            return "AN ERROR HAPPEN WHEN CREATING THE ASCII ART";
         }
-      return "AN ERROR HAPPEN WHEN CREATING THE ASCII ART";
     }
 
     /**
-     * Generates ASCII art from your image by going through each pixel of your image and
+     * Generates ASCII art from your image by going through each pixel and
      * calculating its representation according to the algorithm defined in {@link ParserConfig}.<br><br>
      *
-     * If your ParserConfig have less than 256 symbols, the symbol representation will be defined in a symbolGap. <br>
+     * If your ParserConfig have less than 256 symbols, then the symbol representation will be defined in a symbolGap. <br>
      * A symbolGap is how many brightness values one character might represent:<br>
      * For instance, if you have a list with 128 symbols, then you have a symbol gap of 256 / 128 which is 2
-     * so this means that each character(symbol) represents 2 brightness units.<br>
+     * so this means that each symbol represents 2 brightness units.<br>
      * A brightness unit is defined by the shades of white to black,
-     * the maximum brightness a pixel/symbol can reach should be 255, and the minimum 0.
+     * the maximum brightness a pixel/symbol can reach is 255, and the minimum 0.
      *
      * @param betterImage image instance
      * @param parserConfig AsciiParserConfig, must be built with {@link ParserBuilder}
@@ -85,15 +74,14 @@ public class AsciiParser {
     }
 
     /**
-     * Calculates and returns an element according to its brightness on an element array
+     * Calculates and returns an element according to a brightness value on an element array.
      * @param brightness element brightness value
-     * @param symbolsGap how many brightness units a symbol can represents  see {@link AsciiParser.parse}
-     * @param pixelLightSymbols
-     * @return
-     * @param <T>
+     * @param symbolsGap how many brightness units a symbol can represents, see {@link AsciiParser#parse}
+     * @param pixelLightSymbols Array containing all the possible symbols
+     * @return The element according to the given brightness value
      */
     public static <T> T getSymbol(int brightness, int symbolsGap, T[] pixelLightSymbols) {
-        int symbolIndex = (int) (brightness / (float) symbolsGap);
+        int symbolIndex = brightness / symbolsGap;
 
         if (symbolIndex < 0) {
             symbolIndex = 0;
