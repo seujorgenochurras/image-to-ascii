@@ -4,7 +4,6 @@
 image-to-ascii is a java image to ascii art parser, as the name implies, it generates an ASCII art from any image.<br>
 It is highly configurable but at the same time easy to use.
 
-
 # Download
 
 Gradle:
@@ -31,16 +30,16 @@ Maven:
 
 [JPM](https://github.com/seujorgenochurras/Jhey-Package-Manager):
 
-  ⚠️ NOT RECOMMENDED ⚠️ [JPM](https://github.com/seujorgenochurras/Jhey-Package-Manager) has a hole lots of bugs 
-  and it'll probably cause you to have a massive headache.<br>
+  ``jpm -i=io.github.seujorgenochurras.image-to-ascii``
+
+  ⚠️ NOT RECOMMENDED ⚠️ [JPM](https://github.com/seujorgenochurras/Jhey-Package-Manager) has a whole lots of bugs 
+  and it'll probably give you a massive headache.<br>
   This is here because I worked hard (and badly) on it, 
-  if you liked the idea please let me know.
+  if you liked the idea please let me know somehow.
     
-  `jpm -i=io.github.seujorgenochurras.image-to-ascii`  
-  
 # Usage
 
-Since the parser is highly configurabe it might be really annoying to use it.
+Since the parser is highly configurabe it might be really annoying to use.
 So if you are in a hurry or you just don't want to read the code you can use the `DefaultParserConfig`.
 
 ```java
@@ -96,4 +95,3 @@ If you want to configure more stuff such as the core algorithms, you can do it w
       More specifically ANSI colors, if you have no idea what ANSI is,
       it is basically a standard on most of terminals that allows you to make some pretty awesome stuff, like playing videos with characters on your terminal or       even colorize them.<br>
       for now there are only 2 colored algorithms, the normal ANSI and the ANSI with tones
-
