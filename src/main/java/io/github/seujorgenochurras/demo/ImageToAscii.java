@@ -7,7 +7,6 @@ import io.github.seujorgenochurras.image.ascii.ParserBuilder;
 import io.github.seujorgenochurras.image.ascii.ParserConfig;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.bright.Algorithms;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.color.AnsiColorAlgorithm;
-import io.github.seujorgenochurras.image.ascii.algorithm.pixel.scale.PixelScaleAlgorithm;
 import io.github.seujorgenochurras.image.pixel.color.PixelColor;
 
 import javax.imageio.ImageIO;
@@ -17,27 +16,25 @@ import java.io.IOException;
 
 import static io.github.seujorgenochurras.util.StringUtils.getUTFChars;
 
-public class ImageToAsciiARt {
-    private static final int maxSymbols = 255;
+public class ImageToAscii {
 
     private static final String[] unorderedSymbols = getUTFChars(32, 123);
-    private static final String[] symbols = BestSymbolPatternFinder.findBestPattern(1, maxSymbols, unorderedSymbols).toArray();
+    private static final String[] symbols = BestSymbolPatternFinder.findBestPattern(1, unorderedSymbols).toArray();
 
 
     private static final ParserConfig parserConfig = ParserBuilder.startBuild()
-            .parserAlgorithm(Algorithms.HUMAN_EYE_ALGORITHM.getAlgorithm())
+            .parserAlgorithm(Algorithms.HUMAN_EYE_ALGORITHM)
             .scaled()
-                .algorithm(PixelScaleAlgorithm.SMOOTH)
                 .height(50)
                 .width(100)
             .getScale()
             .symbols(symbols)
-            .withColor(new AnsiColorAlgorithm())
+            .colorAlgorithm(new AnsiColorAlgorithm())
             .build();
     private static PixelColor[] tones;
 
     public static void main(String[] args) throws IOException {
-        asciifyFile("/home/thiago/Desktop/projects/image-to-ascii/src/main/resources/image/jorge.png");
+        asciifyFile("src/main/resources/image/jorge.png");
     }
 
     public static void asciifyFile(String fileName) throws IOException {
