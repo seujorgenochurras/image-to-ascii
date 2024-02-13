@@ -5,7 +5,7 @@ image-to-ascii is a java image to ascii art parser, as the name implies, it gene
 It is highly configurable but at the same time easy to use.
 
 # Download
-I haven't tested it yet, but I'm 99% sure you need to be using any jdk above 18
+I haven't tested it yet, but I'm 99% sure you need to be using any jdk above 18<br>
 Gradle:
 
 ```gradle
