@@ -44,14 +44,13 @@ Since the parser is highly configurabe it might be really annoying to use it.
 So if you are in a hurry or you just don't want to read the code you can use the `DefaultParserConfig`.
 
 ```java
+  String imagePath = "smth/somewhere/yourImageFilePath";
 
-        String imagePath = "smth/somewhere/yourImageFilePath";
+  String imageAsciiArt = DefaultAsciifier.toAscii(imagePath, height, width, withAnsiColor);
 
-        String imageAsciiArt = DefaultAsciifier.toAscii(imagePath, height, width, withAnsiColor);
-
-        FileWriter fileWriter = new FileWriter("myAsciiArt.txt");
-        fileWriter.write(imageAsciiArt);
-        fileWriter.flush();
+  FileWriter fileWriter = new FileWriter("myAsciiArt.txt");
+  fileWriter.write(imageAsciiArt);
+  fileWriter.flush();
 
 ```
 
@@ -64,14 +63,14 @@ If you want to configure more stuff such as the core algorithms, you can do it w
     String[] symbols = {" ", ".", "-", "I", "W", "@"};
 
     ParserConfig parserConfig = ParserBuilder.startBuild()
-            .parserAlgorithm(Algorithms.HUMAN_EYE_ALGORITHM)
-            .scaled()
-              .height(30)
-              .width(80)
-            .getScale()
-            .symbols(symbols)
-            .withColor(new AnsiColorAlgorithm())
-            .build();
+      .parserAlgorithm(Algorithms.HUMAN_EYE_ALGORITHM)
+      .scaled()
+          .height(30)
+          .width(80)
+      .getScale()
+      .symbols(symbols)
+      .withColor(new AnsiColorAlgorithm())
+      .build();
 
         String asciiArt = AsciiParser.parse(imagePath, parserConfig);
 
@@ -87,8 +86,8 @@ If you want to configure more stuff such as the core algorithms, you can do it w
 
        ```java
        
-        String[] unorderedSymbols = StringUtils.getUTFChars(32, 132);
-        String[] symbols = BestSymbolPatternFinder.findBestPattern(totalSymbols, unorderedSymbols).toArray();
+         String[] unorderedSymbols = StringUtils.getUTFChars(32, 132);
+         String[] symbols = BestSymbolPatternFinder.findBestPattern(totalSymbols, unorderedSymbols).toArray();
        
       ```
   
