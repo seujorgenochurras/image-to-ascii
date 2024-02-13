@@ -4,6 +4,19 @@
 image-to-ascii is a java image to ascii art parser, as the name implies, it generates an ASCII art from any image.<br>
 It is highly configurable but at the same time easy to use.
 
+## Results
+
+<div>
+
+<img src="src/main/resources/image/demo/car-colorful.png" alt="car" width="450px"/>
+
+<img src="src/main/resources/image/demo/neofetch.png" alt="neofetch" width="550px"/>
+
+<img src="src/main/resources/image/demo/lion-no-color.png" alt="lion" width="350px"/>
+
+<img src="src/main/resources/image/demo/holow-knight-big.png" alt="hollow" width="650px"/>
+</div>
+<br>
 
 # Download
 
@@ -37,7 +50,7 @@ Maven:
   if you liked the idea please let me know.
     
   `jpm -i=io.github.seujorgenochurras.image-to-ascii`  
-  
+
 # Usage
 
 Since the parser is highly configurabe it might be really annoying to use it.
@@ -54,6 +67,7 @@ So if you are in a hurry or you just don't want to read the code you can use the
         fileWriter.flush();
 
 ```
+<br>
 
 ## Configurations 
 
@@ -73,7 +87,7 @@ If you want to configure more stuff such as the core algorithms, you can do it w
             .withColor(new AnsiColorAlgorithm())
             .build();
 
-        String asciiArt = AsciiParser.parse(imagePath, parserConfig);
+    String asciiArt = AsciiParser.parse(imagePath, parserConfig);
 
 ```
 
