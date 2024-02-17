@@ -13,9 +13,10 @@ public class SymbolList {
         this.sortedSymbols = new Symbol[listSize - 1];
     }
 
-    public SymbolList(int listSize, int acceptableCharAccurace) {
-        this.sortedSymbols = new Symbol[listSize - 1];
-        this.acceptableSymbolAccuracy = acceptableCharAccurace;
+    public SymbolList(int listSize, int acceptableCharAccuracy) {
+        this.sortedSymbols = new Symbol[listSize-1];
+        System.out.println(sortedSymbols.length);
+        this.acceptableSymbolAccuracy = acceptableCharAccuracy;
 
     }
 
@@ -23,7 +24,7 @@ public class SymbolList {
     public void addSymbol(Symbol symbol) {
         double newSymbolBrightness = symbol.getBrightness();
 
-        int symbolShade = (int) Math.round(newSymbolBrightness / ((double) 256 / sortedSymbols.length));
+        int symbolShade = (int) Math.round(newSymbolBrightness / ((double) 255 / sortedSymbols.length));
         if (sortedSymbols.length - 1 < symbolShade) return;
 
 
@@ -41,7 +42,7 @@ public class SymbolList {
             sortedSymbols[symbolShade] = symbol;
         } else {
             for (int i = symbolShade; i < symbolShade + acceptableSymbolAccuracy; i++) {
-                if (i > sortedSymbols.length - 1) break;
+                if (i > sortedSymbols.length-1) break;
 
                 if (sortedSymbols[i] == null) {
                     sortedSymbols[i] = symbol;
@@ -58,11 +59,11 @@ public class SymbolList {
     public String[] toArray() {
         List<String> stringList = new ArrayList<>();
 
-        for (int i = 0; i < sortedSymbols.length - 1; i++) {
+        for (int i = 0; i <= sortedSymbols.length - 1; i++) {
             if (sortedSymbols[i] == null) continue;
             stringList.add(sortedSymbols[i].getData());
         }
-        return stringList.toArray(new String[stringList.size() - 1]);
+        return stringList.toArray(new String[stringList.size()]);
     }
 
     public int size() {

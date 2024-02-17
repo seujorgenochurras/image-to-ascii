@@ -7,6 +7,7 @@ import io.github.seujorgenochurras.image.ascii.algorithm.pixel.bright.Algorithms
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class BestSymbolPatternFinder {
@@ -17,6 +18,7 @@ public class BestSymbolPatternFinder {
     }
 
     public static SymbolList findBestPattern(int maxSymbols, String... chars) {
+
         return findBestPattern(10, maxSymbols, chars);
     }
 
@@ -33,6 +35,8 @@ public class BestSymbolPatternFinder {
 
         SymbolList symbolList = new SymbolList(maxSymbols, symbolAccuracy);
         for (String symbol : chars) {
+            if(symbolList.size() > maxSymbols) break;
+
             g2d = image.getGraphics();
 
             Font font = new Font("Fira Mono", Font.BOLD, 40);
@@ -67,7 +71,9 @@ public class BestSymbolPatternFinder {
             int red = color.getRed().getColorValue();
             int green = color.getGreen().getColorValue();
             int blue = color.getBlue().getColorValue();
-            avgPixelBrightness.addAndGet(Algorithms.BRIGHTEST_PIXEL.getAlgorithm().getPixelRepresentation(red, green, blue));
+
+            long pixelBrightness = Algorithms.BRIGHTEST_PIXEL.getAlgorithm().getPixelRepresentation(red, green, blue);
+            avgPixelBrightness.addAndGet(pixelBrightness);
 
         });
         return (double) avgPixelBrightness.get() / betterImage.getPixels().size();
