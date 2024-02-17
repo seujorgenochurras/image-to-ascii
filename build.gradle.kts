@@ -21,6 +21,7 @@ tasks.test {
 tasks.withType(Jar::class) {
     manifest {
         attributes["Manifest-Version"] = "1.0"
+        attributes["Main-Class"] = "io.github.seujorgenochurras.ScreenParser"
     }
 }
 publishing {

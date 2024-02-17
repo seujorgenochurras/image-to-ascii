@@ -1,5 +1,6 @@
 package io.github.seujorgenochurras.image.ascii;
 
+import io.github.seujorgenochurras.demo.ImageToAscii;
 import io.github.seujorgenochurras.image.BetterImage;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.scale.PixelScale;
 
@@ -8,9 +9,12 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AsciiParser {
 
+    private static final Logger logger =  Logger.getLogger("AsciiParser");
     private AsciiParser() {
     }
 
@@ -47,6 +51,12 @@ public class AsciiParser {
      */
     public static String parse(BetterImage betterImage, ParserConfig parserConfig) {
         var pixelLightSymbols = parserConfig.getSymbols();
+
+        if(pixelLightSymbols.length == 0){
+             logger.warning("No symbols provided");
+             return "";
+        }
+
         int symbolsGap = 255 / pixelLightSymbols.length;
 
         BetterImage scaledImage = scaleImage(betterImage, parserConfig.getScale());
@@ -54,7 +64,7 @@ public class AsciiParser {
 
         StringBuilder builder = new StringBuilder();
         scaledImage.getPixels().forEach(pixel -> {
-            var color = pixel.color;
+            var color = pixel.getColor();
 
             int red = color.getRed().getColorValue();
             int green = color.getGreen().getColorValue();

@@ -10,19 +10,7 @@ public class PixelBuilder {
     }
 
     public static ImagePixelGroup build(BufferedImage image) {
-        ImagePixelGroup pixels = new ImagePixelGroup();
-
-        final int imageWidth = image.getWidth();
-        final int imageHeight = image.getHeight();
-
-        //TODO Profile it and fix this massive ram drain
-        for (int i = 0; i < imageHeight; i++) {
-            for (int j = 0; j < imageWidth; j++) {
-                Color pixelColor = new Color(image.getRGB(j, i));
-                pixels.add(new ImagePixel(pixelColor, j, i));
-            }
-        }
-        return pixels;
+        return new ImagePixelGroup(image);
     }
 
     public static ImagePixelGroup build(BetterImage betterImage) {
