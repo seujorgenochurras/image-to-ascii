@@ -1,4 +1,4 @@
-package io.github.seujorgenochurras;
+package io.github.seujorgenochurras.demo;
 
 import io.github.seujorgenochurras.color.BestSymbolPatternFinder;
 import io.github.seujorgenochurras.image.BetterImage;
