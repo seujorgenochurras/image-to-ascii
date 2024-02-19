@@ -30,7 +30,7 @@ public class ParserConfig {
     }
 
     public String[] getSymbols() {
-        return isSymbolReversed ? ArrayUtils.reverse(symbols) : symbols;
+        return isSymbolReversed() ? ArrayUtils.reverse(symbols) : symbols;
     }
 
     public ParserConfig setSymbols(String[] symbols) {
@@ -66,22 +66,16 @@ public class ParserConfig {
     }
 
 
-    @Override
-    public String toString() {
-        return "AsciiParserConfig{" +
-                "scale=" + scale +
-                ", symbols=" + Arrays.toString(symbols) +
-                ", algorithm=" + algorithm +
-                ", isSymbolReversed=" + isSymbolReversed +
-                '}';
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ParserConfig that = (ParserConfig) o;
-        return isSymbolReversed == that.isSymbolReversed && Objects.equals(scale, that.scale) && Arrays.equals(symbols, that.symbols) && Objects.equals(algorithm, that.algorithm);
+        return isSymbolReversed == that.isSymbolReversed &&
+                Objects.equals(getScale(), that.getScale()) &&
+                Arrays.equals(getSymbols(), that.getSymbols()) &&
+                Objects.equals(getAlgorithm(), that.getAlgorithm());
     }
 
     @Override

@@ -10,12 +10,11 @@ public class SymbolList {
 
 
     public SymbolList(int listSize) {
-        this.sortedSymbols = new Symbol[listSize - 1];
+        this.sortedSymbols = new Symbol[listSize];
     }
 
     public SymbolList(int listSize, int acceptableCharAccuracy) {
-        this.sortedSymbols = new Symbol[listSize - 1];
-        System.out.println(sortedSymbols.length);
+        this.sortedSymbols = new Symbol[listSize];
         this.acceptableSymbolAccuracy = acceptableCharAccuracy;
 
     }
@@ -25,7 +24,7 @@ public class SymbolList {
         double newSymbolBrightness = symbol.getBrightness();
 
         int symbolShade = (int) Math.round(newSymbolBrightness / ((double) 255 / sortedSymbols.length));
-        if (sortedSymbols.length - 1 < symbolShade) return;
+        if (sortedSymbols.length < symbolShade) return;
 
 
         Symbol currentSymbol = sortedSymbols[symbolShade];
