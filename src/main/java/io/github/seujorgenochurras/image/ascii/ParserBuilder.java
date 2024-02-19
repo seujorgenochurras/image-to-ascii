@@ -24,8 +24,8 @@ public class ParserBuilder {
 
     /**
      * Sets the symbols to be used in the ascii art
-     * @param symbols from darkest to brightest
      *
+     * @param symbols from darkest to brightest
      */
     public ParserBuilder symbols(String... symbols) {
         this.brightnessSymbols = symbols;
@@ -34,6 +34,7 @@ public class ParserBuilder {
 
     /**
      * Starts the image scale builder
+     *
      * @return PixelScaleBuilder
      */
     public PixelScaleConfig scaled() {
@@ -44,10 +45,12 @@ public class ParserBuilder {
         this.algorithm = algorithm;
         return this;
     }
+
     public ParserBuilder parserAlgorithm(Algorithms algorithm) {
         this.algorithm = algorithm.getAlgorithm();
         return this;
     }
+
     public ParserBuilder reversed(boolean isSymbolWhiteToBlack) {
         this.isSymbolReverted = isSymbolWhiteToBlack;
         return this;
@@ -60,6 +63,7 @@ public class ParserBuilder {
 
     /**
      * Sets the pixel to be colored
+     *
      * @param colorAlgorithm the algorithm to colorize your characters
      * @return builder
      */
@@ -69,7 +73,6 @@ public class ParserBuilder {
     }
 
     /**
-     *
      * @return your pixelParserConfig ready to be used
      */
     public ParserConfig build() {
@@ -107,6 +110,7 @@ public class ParserBuilder {
 
         /**
          * Sets the image scaling algorithm, this doesn't change much
+         *
          * @param algorithm
          * @return
          */
@@ -116,7 +120,6 @@ public class ParserBuilder {
         }
 
         /**
-         *
          * @return the built pixelScaleConfig
          */
         public ParserBuilder getScale() {

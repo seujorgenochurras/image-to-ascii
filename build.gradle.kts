@@ -3,10 +3,6 @@ plugins {
     id("maven-publish")
     id("signing")
 }
-
-val currentGroup = "io.github.seujorgenochurras"
-val currentVersion = "0.0.2"
-
 repositories {
     mavenCentral()
 }
@@ -14,6 +10,7 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     implementation("io.metaloom.video:video4j:1.3.0")
+    implementation("org.openpnp:opencv:4.6.0-0")
 }
 tasks.test {
     useJUnitPlatform()
@@ -21,14 +18,15 @@ tasks.test {
 tasks.withType(Jar::class) {
     manifest {
         attributes["Manifest-Version"] = "1.0"
+        attributes["Main-Class"] = "io.github.seujorgenochurras.ScreenParser"
     }
 }
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
-            groupId = currentGroup
+            groupId = "io.github.seujorgenochurras"
             artifactId = "image-to-ascii"
-            version = currentVersion
+            version = "0.0.2"
             from(components["java"])
 
             pom {
