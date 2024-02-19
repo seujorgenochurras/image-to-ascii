@@ -13,7 +13,6 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Arrays;
 
 import static io.github.seujorgenochurras.util.StringUtils.getUTFChars;
 
@@ -24,10 +23,10 @@ public class ImageToAscii {
 
 
     private static final ParserConfig parserConfig = ParserBuilder.startBuild()
-            .parserAlgorithm(Algorithms.BRIGHTEST_PIXEL)
+            .parserAlgorithm(Algorithms.HUMAN_EYE_ALGORITHM)
             .scaled()
-                .height(50)
-                .width(100)
+            .height(50)
+            .width(100)
             .getScale()
             .symbols(symbols)
             .colorAlgorithm(new AnsiColorAlgorithm())

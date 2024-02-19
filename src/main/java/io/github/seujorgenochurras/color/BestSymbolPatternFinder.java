@@ -7,7 +7,6 @@ import io.github.seujorgenochurras.image.ascii.algorithm.pixel.bright.Algorithms
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class BestSymbolPatternFinder {
@@ -35,7 +34,7 @@ public class BestSymbolPatternFinder {
 
         SymbolList symbolList = new SymbolList(maxSymbols, symbolAccuracy);
         for (String symbol : chars) {
-            if(symbolList.size() > maxSymbols) break;
+            if (symbolList.size() > maxSymbols) break;
 
             g2d = image.getGraphics();
 

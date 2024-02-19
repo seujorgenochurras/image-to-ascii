@@ -6,9 +6,9 @@ import io.github.seujorgenochurras.image.ascii.AsciiParser;
 import io.github.seujorgenochurras.image.ascii.ParserBuilder;
 import io.github.seujorgenochurras.image.ascii.ParserConfig;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.bright.Algorithms;
+import io.github.seujorgenochurras.image.ascii.algorithm.pixel.color.DefaultColorType;
 
 import java.awt.*;
-import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -22,19 +22,32 @@ public class ScreenParser {
     public static final ParserConfig defaultParserConfig = ParserBuilder.startBuild()
             .symbols(symbols)
             .scaled()
-            .height(150)
+            .height(80)
             .width(400)
             .getScale()
             .parserAlgorithm(Algorithms.HUMAN_EYE_ALGORITHM.getAlgorithm())
-            //.withColor(ColorType.ANSI)
+            .colorAlgorithm(DefaultColorType.ANSI)
             .build();
 
 
     public static void main(String[] args) throws AWTException {
+        if (args[0] == null || args[1] == null) {
+            args[0] = "80";
+            args[1] = "300";
+        }
+
+        final ParserConfig defaultParserConfig = ParserBuilder.startBuild()
+                .symbols(symbols)
+                .scaled()
+                .height(Integer.parseInt(args[1]))
+                .width(Integer.parseInt(args[0]))
+                .getScale()
+                .parserAlgorithm(Algorithms.HUMAN_EYE_ALGORITHM.getAlgorithm())
+                //   .colorAlgorithm(DefaultColorType.ANSI)
+                .build();
+
+
         Dimension screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int screenDimensionWidth = screenDimension.width;
-        int screenDimensionHeight = screenDimension.height;
-        screenDimension.setSize(1400, screenDimensionHeight);
         Rectangle screenRect = new Rectangle(screenDimension);
         Robot robot = new Robot();
         System.out.print("\u001b[2J");
@@ -44,7 +57,6 @@ public class ScreenParser {
             @Override
             public void run() {
                 fps[0] = framesThisSecond[0];
-                System.out.println("\u001B[1;1000H Current fps: " + fps[0]);
                 framesThisSecond[0] = 0;
 
             }
@@ -57,7 +69,7 @@ public class ScreenParser {
             framesThisSecond[0]++;
             System.out.print("\u001B[1;1H");
             System.out.print(AsciiParser.parse(new BetterImage(robot.createScreenCapture(screenRect)), defaultParserConfig));
-            System.out.println("\u001B[1;1000H Current fps: " + fps[0]);
+            System.out.println("\u001B[0;1000H Current fps: " + fps[0]);
         }
     }
 

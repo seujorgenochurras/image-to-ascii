@@ -14,7 +14,7 @@ public class SymbolList {
     }
 
     public SymbolList(int listSize, int acceptableCharAccuracy) {
-        this.sortedSymbols = new Symbol[listSize-1];
+        this.sortedSymbols = new Symbol[listSize - 1];
         System.out.println(sortedSymbols.length);
         this.acceptableSymbolAccuracy = acceptableCharAccuracy;
 
@@ -42,7 +42,7 @@ public class SymbolList {
             sortedSymbols[symbolShade] = symbol;
         } else {
             for (int i = symbolShade; i < symbolShade + acceptableSymbolAccuracy; i++) {
-                if (i > sortedSymbols.length-1) break;
+                if (i > sortedSymbols.length - 1) break;
 
                 if (sortedSymbols[i] == null) {
                     sortedSymbols[i] = symbol;

@@ -7,11 +7,9 @@ import io.github.seujorgenochurras.image.ascii.ParserBuilder;
 import io.github.seujorgenochurras.image.ascii.ParserConfig;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.bright.Algorithms;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.color.DefaultColorType;
-import io.github.seujorgenochurras.video.buffer.BufferedAsciiVideoParser;
-import io.github.seujorgenochurras.video.buffer.PixelAnalyzerBuffer;
 import io.metaloom.video4j.Video4j;
-import io.metaloom.video4j.VideoFile;
-import io.metaloom.video4j.Videos;
+import nu.pattern.OpenCV;
+import org.opencv.videoio.VideoCapture;
 
 import static io.github.seujorgenochurras.util.StringUtils.getUTFChars;
 
@@ -35,33 +33,42 @@ public class VideoToAsciiAnimation {
             .build();
 
     public static void main(String[] args) throws InterruptedException {
+        System.loadLibrary("ffmepg");
+
+        OpenCV.loadShared();
+        OpenCV.loadLocally();
         Video4j.init();
-        VideoFile videoFile = Videos.open(VIDEO_PATH);
+        VideoCapture a = new VideoCapture(VIDEO_PATH);
+        Thread.sleep(4000);
+        System.out.println(a.isOpened());
 
-        PixelAnalyzerBuffer pixelAnalyzerBuffer = new PixelAnalyzerBuffer(videoFile, 25);
 
-        pixelAnalyzerBuffer.startQueue();
-
-        var bufferedAsciiVideoParser = new BufferedAsciiVideoParser(parserConfig, pixelAnalyzerBuffer, 10);
-
-        bufferedAsciiVideoParser.startQueue();
-
-        System.out.print("\u001B[0J");
-        Thread.sleep(5000);
-        long videoLength = pixelAnalyzerBuffer.getVideoFileLength();
-        new Thread(() -> {
-            for (int i = 0; i < videoLength; i++) {
-                try {
-                    Thread.sleep(1000 / DESIRED_FPS);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                String asciiArt = bufferedAsciiVideoParser.getAsciiArtQueue().poll();
-                if (asciiArt == null) continue;
-                System.out.print("\u001B[1;1H");
-                System.out.print(asciiArt);
-            }
-        }).start();
+//        VideoFile videoFile = Videos.get(VIDEO_PATH);
+//
+//
+//        PixelAnalyzerBuffer pixelAnalyzerBuffer = new PixelAnalyzerBuffer(videoFile, 25);
+//
+//        pixelAnalyzerBuffer.startQueue();
+//
+//        var bufferedAsciiVideoParser = new BufferedAsciiVideoParser(parserConfig, pixelAnalyzerBuffer, 10);
+//
+//        bufferedAsciiVideoParser.startQueue();
+//
+//        System.out.print("\u001B[0J");
+//        long videoLength = pixelAnalyzerBuffer.getVideoFileLength();
+//        new Thread(() -> {
+//            for (int i = 0; i < videoLength; i++) {
+//                try {
+//                    Thread.sleep(1000 / DESIRED_FPS);
+//                } catch (InterruptedException e) {
+//                    throw new RuntimeException(e);
+//                }
+//                String asciiArt = bufferedAsciiVideoParser.getAsciiArtQueue().poll();
+//                if (asciiArt == null) continue;
+//                System.out.print("\u001B[1;1H");
+//                System.out.print(asciiArt);
+//            }
+//        }).start();
 
     }
 
