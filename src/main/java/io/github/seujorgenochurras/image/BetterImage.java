@@ -1,8 +1,6 @@
 package io.github.seujorgenochurras.image;
 
-import io.github.seujorgenochurras.image.pixel.ImagePixel;
 import io.github.seujorgenochurras.image.pixel.ImagePixelGroup;
-import io.github.seujorgenochurras.image.pixel.PixelBuilder;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -49,7 +47,6 @@ public class BetterImage {
     public ImagePixelGroup getPixels() {
         return pixels;
     }
-
 
 
 }
