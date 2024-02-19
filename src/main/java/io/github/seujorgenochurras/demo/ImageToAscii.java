@@ -19,14 +19,14 @@ import static io.github.seujorgenochurras.util.StringUtils.getUTFChars;
 public class ImageToAscii {
 
     private static final String[] unorderedSymbols = getUTFChars(32, 123);
-    private static final String[] symbols = BestSymbolPatternFinder.findBestPattern(1, unorderedSymbols).toArray();
+    private static final String[] symbols = BestSymbolPatternFinder.findBestPattern(100, unorderedSymbols).toArray();
 
 
     private static final ParserConfig parserConfig = ParserBuilder.startBuild()
             .parserAlgorithm(Algorithms.HUMAN_EYE_ALGORITHM)
             .scaled()
-                .height(50)
-                .width(100)
+            .height(50)
+            .width(100)
             .getScale()
             .symbols(symbols)
             .colorAlgorithm(new AnsiColorAlgorithm())
@@ -34,7 +34,7 @@ public class ImageToAscii {
     private static PixelColor[] tones;
 
     public static void main(String[] args) throws IOException {
-        asciifyFile("src/main/resources/image/jorge.png");
+        asciifyFile("/home/thiagoelias/IdeaProjects/image-to-ascii/src/main/resources/image/car.png");
     }
 
     public static void asciifyFile(String fileName) throws IOException {
@@ -43,7 +43,7 @@ public class ImageToAscii {
 
         String asciiArt = AsciiParser.parse(betterImage, parserConfig);
 
-        File newFile = new File("/home/thiago/Desktop/projects/image-to-ascii/src/main/resources/" + image.getName().replaceAll("png|jpg|jpeg", "txt"));
+        File newFile = new File("myAscii.txt");
         FileWriter fileWriter = new FileWriter(newFile);
         fileWriter.write(asciiArt);
         fileWriter.flush();

@@ -15,4 +15,16 @@ public class ImagePixel {
         this.x = x;
         this.y = y;
     }
+
+    public int x() {
+        return x;
+    }
+
+    public int y() {
+        return y;
+    }
+
+    public PixelColor getColor() {
+        return color;
+    }
 }

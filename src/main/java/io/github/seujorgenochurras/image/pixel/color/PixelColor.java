@@ -21,18 +21,6 @@ public class PixelColor {
 
     }
 
-    public int getRGB() {
-        return instantiateCurrentColor().getRGB();
-    }
-
-    /***
-     this method is needed to update current color, because the class Color is immutable
-     * @return a new color
-     */
-    public Color instantiateCurrentColor() {
-        return new Color(getRed().colorValue, getGreen().colorValue, getBlue().colorValue, getAlpha().colorValue);
-    }
-
     public Red getRed() {
         return red;
     }
