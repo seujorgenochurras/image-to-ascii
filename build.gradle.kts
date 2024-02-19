@@ -32,7 +32,7 @@ publishing {
         create<MavenPublication>("mavenJava") {
             groupId = "io.github.seujorgenochurras"
             artifactId = "image-to-ascii"
-            version = "0.0.2"
+            version = "0.0.3"
             from(components["java"])
 
             pom {
