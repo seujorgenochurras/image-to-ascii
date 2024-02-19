@@ -16,14 +16,9 @@ public class ImagePixel {
         this.y = y;
     }
 
-    public int x() {
-        return x;
-    }
-
-    public int y() {
-        return y;
-    }
-
+    /**
+     * @return color instance of pixel
+     */
     public PixelColor getColor() {
         return color;
     }

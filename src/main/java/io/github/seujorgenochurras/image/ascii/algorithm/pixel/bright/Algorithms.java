@@ -1,9 +1,10 @@
 package io.github.seujorgenochurras.image.ascii.algorithm.pixel.bright;
 
-import io.github.seujorgenochurras.image.ascii.algorithm.ParserAlgorithm;
+import io.github.seujorgenochurras.image.ascii.algorithm.BrightnessValueCalculator;
 
 public enum Algorithms {
-    /***
+
+    /**
      * Paints according to the rgb value that's the closest to white
      */
     BRIGHTEST_PIXEL(new BrightestAlgorithm()),
@@ -16,6 +17,9 @@ public enum Algorithms {
      */
     LIGHTEST_PIXEL(new LightestAlgorithm()),
 
+    /**
+     * Paints according to the darkest pixel color value
+     */
     DARKEST_PIXEL(new DarkestPixelAlgorithm()),
 
     /**
@@ -24,13 +28,14 @@ public enum Algorithms {
      */
     HUMAN_EYE_ALGORITHM(new HumanEyeAlgorithm());
 
-    private final ParserAlgorithm algorithm;
+    private final BrightnessValueCalculator algorithm;
 
-    Algorithms(ParserAlgorithm algorithm) {
+    Algorithms(BrightnessValueCalculator algorithm) {
         this.algorithm = algorithm;
     }
 
-    public ParserAlgorithm getAlgorithm() {
+
+    public BrightnessValueCalculator getAlgorithm() {
         return algorithm;
     }
 }

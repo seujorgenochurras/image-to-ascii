@@ -27,7 +27,7 @@ public class DefaultAsciifier {
     }
 
 
-    public static String toAscii(String imagePath, int height, int width, boolean withAnsiColor) {
+    public static String toAscii(String imagePath, int width, int height, boolean withAnsiColor) {
         ParserBuilder parserBuilder = ParserBuilder.startBuild()
                 .symbols(symbols)
                 .scaled()

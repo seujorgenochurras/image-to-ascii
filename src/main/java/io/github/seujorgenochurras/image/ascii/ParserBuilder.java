@@ -1,6 +1,6 @@
 package io.github.seujorgenochurras.image.ascii;
 
-import io.github.seujorgenochurras.image.ascii.algorithm.ParserAlgorithm;
+import io.github.seujorgenochurras.image.ascii.algorithm.BrightnessValueCalculator;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.bright.Algorithms;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.color.ColorAlgorithm;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.color.DefaultColorType;
@@ -11,7 +11,7 @@ import io.github.seujorgenochurras.image.ascii.algorithm.pixel.scale.PixelScaleA
 public class ParserBuilder {
     private String[] brightnessSymbols = {"@", "#", "!", "."};
     private PixelScale pixelScale = new PixelScale(100, 100, PixelScaleAlgorithm.DEFAULT);
-    private ParserAlgorithm algorithm = Algorithms.HUMAN_EYE_ALGORITHM.getAlgorithm();
+    private BrightnessValueCalculator algorithm = Algorithms.HUMAN_EYE_ALGORITHM.getAlgorithm();
     private ColorAlgorithm colorizeAlgorithm = DefaultColorType.NONE.getAlgorithm();
     private boolean isSymbolReverted = false;
 
@@ -41,7 +41,7 @@ public class ParserBuilder {
         return new PixelScaleConfig(this);
     }
 
-    public ParserBuilder parserAlgorithm(ParserAlgorithm algorithm) {
+    public ParserBuilder parserAlgorithm(BrightnessValueCalculator algorithm) {
         this.algorithm = algorithm;
         return this;
     }
@@ -88,8 +88,8 @@ public class ParserBuilder {
 
 
     public static final class PixelScaleConfig {
-        private final ParserBuilder builder;
 
+        private final ParserBuilder builder;
         private int width;
         private int height;
         private PixelScaleAlgorithm pixelScaleAlgorithm = PixelScaleAlgorithm.DEFAULT;

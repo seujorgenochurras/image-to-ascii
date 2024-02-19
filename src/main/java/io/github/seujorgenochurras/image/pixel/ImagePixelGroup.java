@@ -8,15 +8,13 @@ import java.util.function.Consumer;
 public class ImagePixelGroup extends ArrayList<ImagePixel> {
     private final BufferedImage bufferedImage;
 
-    public ImagePixelGroup(int initialCapacity, BufferedImage bufferedImage) {
-        super(initialCapacity);
-        this.bufferedImage = bufferedImage;
-    }
-
     public ImagePixelGroup(BufferedImage bufferedImage) {
         this.bufferedImage = bufferedImage;
     }
 
+    /**
+     * @param imagePixelConsumer The action to be performed for each pixel
+     */
     @Override
     public void forEach(Consumer<? super ImagePixel> imagePixelConsumer) {
         int imageWidth = bufferedImage.getWidth();
@@ -32,6 +30,9 @@ public class ImagePixelGroup extends ArrayList<ImagePixel> {
 
     }
 
+    /**
+     * @return quantity of pixels in this group
+     */
     @Override
     public int size() {
         return bufferedImage.getHeight() * bufferedImage.getWidth();

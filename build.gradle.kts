@@ -2,6 +2,7 @@ plugins {
     id("java")
     id("maven-publish")
     id("signing")
+    jacoco
 }
 repositories {
     mavenCentral()
@@ -14,7 +15,12 @@ dependencies {
 }
 tasks.test {
     useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
 }
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+}
+
 tasks.withType(Jar::class) {
     manifest {
         attributes["Manifest-Version"] = "1.0"
@@ -26,7 +32,7 @@ publishing {
         create<MavenPublication>("mavenJava") {
             groupId = "io.github.seujorgenochurras"
             artifactId = "image-to-ascii"
-            version = "0.0.2"
+            version = "0.0.3"
             from(components["java"])
 
             pom {
@@ -77,3 +83,9 @@ signing {
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
 }
+
+jacoco{
+    toolVersion = "0.8.11"
+    reportsDirectory = layout.buildDirectory.dir("jacoco")
+}
+
