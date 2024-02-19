@@ -11,6 +11,7 @@ public class AnsiColorWithTones implements ColorAlgorithm {
 
     /**
      * sorted automatically from brightest to darkest
+     *
      * @param tones
      */
     public AnsiColorWithTones(PixelColor... tones) {
