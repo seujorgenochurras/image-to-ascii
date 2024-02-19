@@ -2,6 +2,7 @@ plugins {
     id("java")
     id("maven-publish")
     id("signing")
+    jacoco
 }
 repositories {
     mavenCentral()
@@ -14,7 +15,12 @@ dependencies {
 }
 tasks.test {
     useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
 }
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+}
+
 tasks.withType(Jar::class) {
     manifest {
         attributes["Manifest-Version"] = "1.0"
@@ -77,3 +83,9 @@ signing {
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
 }
+
+jacoco{
+    toolVersion = "0.8.11"
+    reportsDirectory = layout.buildDirectory.dir("jacoco")
+}
+
