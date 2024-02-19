@@ -8,11 +8,6 @@ import java.util.function.Consumer;
 public class ImagePixelGroup extends ArrayList<ImagePixel> {
     private final BufferedImage bufferedImage;
 
-    public ImagePixelGroup(int initialCapacity, BufferedImage bufferedImage) {
-        super(initialCapacity);
-        this.bufferedImage = bufferedImage;
-    }
-
     public ImagePixelGroup(BufferedImage bufferedImage) {
         this.bufferedImage = bufferedImage;
     }

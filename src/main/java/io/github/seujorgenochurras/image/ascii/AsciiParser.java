@@ -1,10 +1,12 @@
 package io.github.seujorgenochurras.image.ascii;
 
 import io.github.seujorgenochurras.image.BetterImage;
+import io.github.seujorgenochurras.image.ascii.exception.NoSymbolException;
 
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,7 +28,7 @@ public class AsciiParser {
             return parse(betterImage, parserConfig);
         } catch (IOException e) {
             logger.log(Level.SEVERE, e.getMessage());
-            return "AN ERROR HAPPEN WHEN CREATING THE ASCII ART";
+            throw new RuntimeException(e);
         }
     }
 
@@ -47,10 +49,9 @@ public class AsciiParser {
      */
     public static String parse(BetterImage betterImage, ParserConfig parserConfig) {
         String[] pixelLightSymbols = parserConfig.getSymbols();
-
-        if (pixelLightSymbols.length == 0) {
-            logger.warning("No symbols provided");
-            return "";
+        //TODO validator
+        if (pixelLightSymbols.length <= 1) {
+            throw new NoSymbolException("No symbols provided");
         }
 
         int symbolsGap = 255 / pixelLightSymbols.length;
