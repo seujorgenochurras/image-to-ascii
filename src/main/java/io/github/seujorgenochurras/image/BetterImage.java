@@ -96,7 +96,7 @@ public class BetterImage {
      * @return true if pixel is exactly in any x-axis border, false otherwise
      */
     public boolean isLateralBorderPixel(int x) {
-        return x == getWidth();
+        return x == getWidth() - 1;
     }
 
     /**
@@ -104,7 +104,7 @@ public class BetterImage {
      * @return true if pixel is exactly in any y-axis border, false otherwise
      */
     public boolean isVerticalBorderPixel(int y) {
-        return y == getHeight();
+        return y == getHeight() - 1;
     }
 
 }
