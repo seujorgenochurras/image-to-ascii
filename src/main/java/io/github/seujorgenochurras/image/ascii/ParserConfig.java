@@ -1,7 +1,7 @@
 package io.github.seujorgenochurras.image.ascii;
 
 
-import io.github.seujorgenochurras.image.ascii.algorithm.ParserAlgorithm;
+import io.github.seujorgenochurras.image.ascii.algorithm.BrightnessValueCalculator;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.color.ColorAlgorithm;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.scale.PixelScale;
 import io.github.seujorgenochurras.util.ArrayUtils;
@@ -12,7 +12,7 @@ import java.util.Objects;
 public class ParserConfig {
     private PixelScale scale;
     private String[] symbols;
-    private ParserAlgorithm algorithm;
+    private BrightnessValueCalculator algorithm;
     private boolean isSymbolReversed;
 
     private ColorAlgorithm colorAlgorithm;
@@ -30,7 +30,7 @@ public class ParserConfig {
     }
 
     public String[] getSymbols() {
-        return isSymbolReversed ? ArrayUtils.reverse(symbols) : symbols;
+        return isSymbolReversed() ? ArrayUtils.reverse(symbols) : symbols;
     }
 
     public ParserConfig setSymbols(String[] symbols) {
@@ -47,11 +47,11 @@ public class ParserConfig {
         return this;
     }
 
-    public ParserAlgorithm getAlgorithm() {
+    public BrightnessValueCalculator getAlgorithm() {
         return algorithm;
     }
 
-    public ParserConfig setAlgorithm(ParserAlgorithm algorithm) {
+    public ParserConfig setAlgorithm(BrightnessValueCalculator algorithm) {
         this.algorithm = algorithm;
         return this;
     }
@@ -66,22 +66,16 @@ public class ParserConfig {
     }
 
 
-    @Override
-    public String toString() {
-        return "AsciiParserConfig{" +
-                "scale=" + scale +
-                ", symbols=" + Arrays.toString(symbols) +
-                ", algorithm=" + algorithm +
-                ", isSymbolReversed=" + isSymbolReversed +
-                '}';
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ParserConfig that = (ParserConfig) o;
-        return isSymbolReversed == that.isSymbolReversed && Objects.equals(scale, that.scale) && Arrays.equals(symbols, that.symbols) && Objects.equals(algorithm, that.algorithm);
+        return isSymbolReversed == that.isSymbolReversed &&
+                Objects.equals(getScale(), that.getScale()) &&
+                Arrays.equals(getSymbols(), that.getSymbols()) &&
+                Objects.equals(getAlgorithm(), that.getAlgorithm());
     }
 
     @Override

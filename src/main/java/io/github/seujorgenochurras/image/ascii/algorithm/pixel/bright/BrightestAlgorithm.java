@@ -1,12 +1,12 @@
 package io.github.seujorgenochurras.image.ascii.algorithm.pixel.bright;
 
-import io.github.seujorgenochurras.image.ascii.algorithm.ParserAlgorithm;
+import io.github.seujorgenochurras.image.ascii.algorithm.BrightnessValueCalculator;
 
 import static io.github.seujorgenochurras.util.MathUtils.max;
 
-public class BrightestAlgorithm implements ParserAlgorithm {
+public class BrightestAlgorithm implements BrightnessValueCalculator {
     @Override
-    public long getPixelRepresentation(int red, int green, int blue) {
+    public int getPixelRepresentation(int red, int green, int blue) {
         return max(red, blue, green);
     }
 }

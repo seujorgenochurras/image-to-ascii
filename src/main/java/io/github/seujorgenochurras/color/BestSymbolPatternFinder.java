@@ -3,6 +3,8 @@ package io.github.seujorgenochurras.color;
 import io.github.seujorgenochurras.color.symbol.Symbol;
 import io.github.seujorgenochurras.color.symbol.SymbolList;
 import io.github.seujorgenochurras.image.BetterImage;
+import io.github.seujorgenochurras.image.ascii.AsciiParser;
+import io.github.seujorgenochurras.image.ascii.ParserConfig;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.bright.Algorithms;
 
 import java.awt.*;
@@ -12,15 +14,33 @@ import java.util.concurrent.atomic.AtomicLong;
 public class BestSymbolPatternFinder {
 
 
+    /**
+     * Overloaded method of {@link BestSymbolPatternFinder#findBestPattern(int, int, String...)}
+     */
     public static SymbolList findBestPattern(String... chars) {
         return findBestPattern(255, chars);
     }
 
+    /**
+     * Overloaded method of {@link BestSymbolPatternFinder#findBestPattern(int, int, String...)}
+     */
     public static SymbolList findBestPattern(int maxSymbols, String... chars) {
 
         return findBestPattern(10, maxSymbols, chars);
     }
 
+    /**
+     * Finds the best pattern given any unsorted symbols
+     *
+     * @param symbolAccuracy amount of preciseness of symbols representation, for example: <br>
+     *                       symbolAcurracy of 2 means that a symbol can either represent its brightness value +1 or -1,
+     *                       <b>lower means high precision</b>
+     *
+     * @param maxSymbols maximum amount of symbols
+     * @param chars unsortedSymbols
+     * @return the best symbol pattern possible in the font Fira Mono
+     */
+    //TODO refactor this non-sense shit
     public static SymbolList findBestPattern(int symbolAccuracy, int maxSymbols, String... chars) {
         int width = 50;
         int height = 50;
