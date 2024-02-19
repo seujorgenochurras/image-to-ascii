@@ -1,7 +1,7 @@
 package io.github.seujorgenochurras.image.ascii;
 
 
-import io.github.seujorgenochurras.image.ascii.algorithm.ParserAlgorithm;
+import io.github.seujorgenochurras.image.ascii.algorithm.BrightnessValueCalculator;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.color.ColorAlgorithm;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.scale.PixelScale;
 import io.github.seujorgenochurras.util.ArrayUtils;
@@ -12,7 +12,7 @@ import java.util.Objects;
 public class ParserConfig {
     private PixelScale scale;
     private String[] symbols;
-    private ParserAlgorithm algorithm;
+    private BrightnessValueCalculator algorithm;
     private boolean isSymbolReversed;
 
     private ColorAlgorithm colorAlgorithm;
@@ -47,11 +47,11 @@ public class ParserConfig {
         return this;
     }
 
-    public ParserAlgorithm getAlgorithm() {
+    public BrightnessValueCalculator getAlgorithm() {
         return algorithm;
     }
 
-    public ParserConfig setAlgorithm(ParserAlgorithm algorithm) {
+    public ParserConfig setAlgorithm(BrightnessValueCalculator algorithm) {
         this.algorithm = algorithm;
         return this;
     }
