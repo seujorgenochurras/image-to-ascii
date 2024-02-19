@@ -4,17 +4,12 @@ import io.github.seujorgenochurras.image.ascii.algorithm.pixel.scale.PixelScale;
 import io.github.seujorgenochurras.image.pixel.ImagePixelGroup;
 import io.github.seujorgenochurras.util.FileUtils;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * A util class that adds more methods to the {@link BufferedImage} class
- *
  */
 public class BetterImage {
 
@@ -36,11 +31,10 @@ public class BetterImage {
 
 
     /**
-     *
      * @param scaleConfig the scale config
      * @return <b>A new instance</b> of {@link BetterImage} scaled according to {@code scaleConfig}
      */
-    public BetterImage getScaledInstance(PixelScale scaleConfig){
+    public BetterImage getScaledInstance(PixelScale scaleConfig) {
         int width = scaleConfig.width();
         int height = scaleConfig.height();
         int algorithm = scaleConfig.scaleAlgorithm().getId();
@@ -59,7 +53,6 @@ public class BetterImage {
     }
 
     /**
-     *
      * @return BufferedImage that composed the BetterImage class
      */
     public BufferedImage getBufferedImage() {
@@ -67,7 +60,6 @@ public class BetterImage {
     }
 
     /**
-     *
      * @return image width
      */
     public int getWidth() {
@@ -75,7 +67,6 @@ public class BetterImage {
     }
 
     /**
-     *
      * @return image height
      */
     public int getHeight() {
@@ -83,7 +74,6 @@ public class BetterImage {
     }
 
     /**
-     *
      * @return An iterable list of pixels of this image
      */
     public ImagePixelGroup getPixels() {
@@ -92,31 +82,28 @@ public class BetterImage {
 
 
     /**
-     *
      * @param x pixel position in the x-axis (left and right)
      * @param y pixel position in the y-axis (up and down)
      * @return true if pixel is exactly in any border, false otherwise
      */
-    public boolean isBorderPixel(int x, int y){
+    public boolean isBorderPixel(int x, int y) {
         return isLateralBorderPixel(x) || isVerticalBorderPixel(y);
     }
 
 
     /**
-     *
      * @param x pixel position in the x-axis (left and right)
      * @return true if pixel is exactly in any x-axis border, false otherwise
      */
-    public boolean isLateralBorderPixel(int x){
+    public boolean isLateralBorderPixel(int x) {
         return x == getWidth();
     }
 
     /**
-     *
      * @param y pixel position in the y-axis (up and down)
      * @return true if pixel is exactly in any y-axis border, false otherwise
      */
-    public boolean isVerticalBorderPixel(int y){
+    public boolean isVerticalBorderPixel(int y) {
         return y == getHeight();
     }
 

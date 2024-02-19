@@ -12,16 +12,15 @@ public class FileUtils {
 
     private static final Logger logger = Logger.getLogger(FileUtils.class.getName());
 
-    private FileUtils(){
+    private FileUtils() {
         //Util class
     }
 
     /**
-     *
      * @param path to the image
      * @return A {@link BufferedImage} instance of your path or null if image doesn't exist
      */
-    public static BufferedImage tryGetImageFromPath(String path){
+    public static BufferedImage tryGetImageFromPath(String path) {
         File imageFile = new File(path);
         try {
             return ImageIO.read(imageFile);

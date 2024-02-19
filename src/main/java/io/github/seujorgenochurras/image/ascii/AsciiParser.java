@@ -1,11 +1,8 @@
 package io.github.seujorgenochurras.image.ascii;
 
 import io.github.seujorgenochurras.image.BetterImage;
-import io.github.seujorgenochurras.image.ascii.algorithm.pixel.scale.PixelScale;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -93,7 +90,7 @@ public class AsciiParser {
     public static <T> T getSymbol(int brightness, int symbolsGap, T[] pixelLightSymbols) {
         int symbolIndex = brightness / symbolsGap;
 
-        int symbolsLastIndex = pixelLightSymbols.length -1;
+        int symbolsLastIndex = pixelLightSymbols.length - 1;
 
         if (symbolIndex < 0) {
             symbolIndex = 0;
