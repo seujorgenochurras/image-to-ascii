@@ -21,12 +21,12 @@ public class AnsiColorWithTones implements ColorAlgorithm {
     @Override
     public String getColorRepresentation(PixelColor color) {
 
-        int red = color.getRed().getColorValue();
-        int green = color.getGreen().getColorValue();
-        int blue = color.getBlue().getColorValue();
+        int red = color.getRed().asDecimal();
+        int green = color.getGreen().asDecimal();
+        int blue = color.getBlue().asDecimal();
 
         int pixelColorRepresentation = Math.toIntExact(new HumanEyeAlgorithm()
-                .getPixelRepresentation(red, green, blue));
+                .getBrightnessValue(red, green, blue));
 
         int symbolsGap = 256 / (tones.length);
 
