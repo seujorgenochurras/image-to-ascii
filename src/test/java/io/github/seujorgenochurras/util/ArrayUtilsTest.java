@@ -1,12 +1,9 @@
 package io.github.seujorgenochurras.util;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 import static io.github.seujorgenochurras.util.ArrayUtils.reverse;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class ArrayUtilsTest {
 

@@ -34,18 +34,19 @@ public class ImageToAscii {
     private static PixelColor[] tones;
 
     public static void main(String[] args) throws IOException {
-        asciifyFile("/home/thiagoelias/IdeaProjects/image-to-ascii/src/main/resources/image/car.png");
-    }
-
-    public static void asciifyFile(String fileName) throws IOException {
-        File image = new File(fileName);
-        BetterImage betterImage = new BetterImage(ImageIO.read(image));
-
-        String asciiArt = AsciiParser.parse(betterImage, parserConfig);
-
+        String asciiArt = asciifyFile("/home/thiagoelias/IdeaProjects/image-to-ascii/src/main/resources/image/car.png");
         File newFile = new File("myAscii.txt");
         FileWriter fileWriter = new FileWriter(newFile);
         fileWriter.write(asciiArt);
         fileWriter.flush();
+    }
+
+    public static String asciifyFile(String fileName) throws IOException {
+        File image = new File(fileName);
+        BetterImage betterImage = new BetterImage(ImageIO.read(image));
+
+        return AsciiParser.parse(betterImage, parserConfig);
+
+
     }
 }

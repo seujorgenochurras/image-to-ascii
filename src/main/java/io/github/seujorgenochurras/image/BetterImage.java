@@ -1,6 +1,6 @@
 package io.github.seujorgenochurras.image;
 
-import io.github.seujorgenochurras.image.ascii.algorithm.pixel.scale.PixelScale;
+import io.github.seujorgenochurras.image.ascii.algorithm.pixel.scale.ImageScale;
 import io.github.seujorgenochurras.image.pixel.ImagePixelGroup;
 import io.github.seujorgenochurras.util.FileUtils;
 
@@ -34,14 +34,14 @@ public class BetterImage {
      * @param scaleConfig the scale config
      * @return <b>A new instance</b> of {@link BetterImage} scaled according to {@code scaleConfig}
      */
-    public BetterImage getScaledInstance(PixelScale scaleConfig) {
-        int width = scaleConfig.width();
-        int height = scaleConfig.height();
-        int algorithm = scaleConfig.scaleAlgorithm().getId();
+    public BetterImage getScaledInstance(ImageScale scaleConfig) {
+        int width = scaleConfig.width;
+        int height = scaleConfig.height;
+        int scaleAlgorithm = scaleConfig.scaleAlgorithm.getId();
 
         var bufferedImage = getBufferedImage();
 
-        Image scaledImage = bufferedImage.getScaledInstance(width, height, algorithm);
+        Image scaledImage = bufferedImage.getScaledInstance(width, height, scaleAlgorithm);
 
         BufferedImage scaledImageBuffer = new BufferedImage(width, height, BufferedImage.TYPE_4BYTE_ABGR_PRE);
 

@@ -35,7 +35,7 @@ public class DefaultAsciifier {
                 .width(width)
                 .getScale();
 
-        if (Boolean.TRUE.equals(withAnsiColor)) {
+        if (withAnsiColor) {
             parserBuilder.colorAlgorithm(DefaultColorType.ANSI);
         }
         ParserConfig parserConfig = parserBuilder.build();
