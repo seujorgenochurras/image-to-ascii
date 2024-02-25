@@ -10,7 +10,7 @@ import io.github.seujorgenochurras.image.ascii.algorithm.BrightnessValueCalculat
 public class HumanEyeAlgorithm implements BrightnessValueCalculator {
 
     @Override
-    public int getPixelRepresentation(int red, int green, int blue) {
+    public int getBrightnessValue(int red, int green, int blue) {
         return Math.toIntExact(Math.round(red * 0.2126 + green * 0.7152 + blue * 0.0722));
     }
 }

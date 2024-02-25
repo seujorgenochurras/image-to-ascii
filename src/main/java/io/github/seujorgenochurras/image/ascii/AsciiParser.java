@@ -1,18 +1,16 @@
 package io.github.seujorgenochurras.image.ascii;
 
 import io.github.seujorgenochurras.image.BetterImage;
-import io.github.seujorgenochurras.image.ascii.exception.NoSymbolException;
 
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class AsciiParser {
 
-    private static final Logger logger = Logger.getLogger("AsciiParser");
+    private static final Logger logger = Logger.getLogger(AsciiParser.class.getName());
 
     private AsciiParser() {
     }
@@ -48,13 +46,9 @@ public class AsciiParser {
      * @return ASCII art
      */
     public static String parse(BetterImage betterImage, ParserConfig parserConfig) {
-        String[] pixelLightSymbols = parserConfig.getSymbols();
-        //TODO validator
-        if (pixelLightSymbols.length <= 1) {
-            throw new NoSymbolException("No symbols provided");
-        }
+        String[] symbols = parserConfig.getSymbols();
 
-        int symbolsGap = 255 / pixelLightSymbols.length;
+        int symbolsGap = 255 / symbols.length;
 
         BetterImage scaledImage = betterImage.getScaledInstance(parserConfig.getScale());
 
@@ -62,13 +56,13 @@ public class AsciiParser {
         scaledImage.getPixels().forEach(pixel -> {
             var color = pixel.getColor();
 
-            int red = color.getRed().getColorValue();
-            int green = color.getGreen().getColorValue();
-            int blue = color.getBlue().getColorValue();
+            int red = color.getRed().asDecimal();
+            int green = color.getGreen().asDecimal();
+            int blue = color.getBlue().asDecimal();
 
-            int pixelBrightness = parserConfig.getAlgorithm().getPixelRepresentation(red, green, blue);
+            int brightnessValue = parserConfig.getAlgorithm().getBrightnessValue(red, green, blue);
 
-            String symbol = getSymbol(pixelBrightness, symbolsGap, pixelLightSymbols);
+            String symbol = getSymbol(brightnessValue, symbolsGap, symbols);
             String symbolColorRepresentation = parserConfig.getColorAlgorithm().getColorRepresentation(color);
 
             builder.append(symbolColorRepresentation).append(symbol);
