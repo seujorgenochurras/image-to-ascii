@@ -4,13 +4,14 @@ import io.github.seujorgenochurras.image.ascii.algorithm.BrightnessValueCalculat
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.bright.Algorithms;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.color.ColorAlgorithm;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.color.DefaultColorType;
-import io.github.seujorgenochurras.image.ascii.algorithm.pixel.scale.PixelScale;
-import io.github.seujorgenochurras.image.ascii.algorithm.pixel.scale.PixelScaleAlgorithm;
+import io.github.seujorgenochurras.image.ascii.algorithm.pixel.scale.ImageScale;
+import io.github.seujorgenochurras.image.ascii.algorithm.pixel.scale.ImageScaleAlgorithm;
+import io.github.seujorgenochurras.validator.ParserBuilderValidator;
 
 
 public class ParserBuilder {
     private String[] brightnessSymbols = {"@", "#", "!", "."};
-    private PixelScale pixelScale = new PixelScale(100, 100, PixelScaleAlgorithm.DEFAULT);
+    private ImageScale imageScale = new ImageScale(100, 100, ImageScaleAlgorithm.DEFAULT);
     private BrightnessValueCalculator algorithm = Algorithms.HUMAN_EYE_ALGORITHM.getAlgorithm();
     private ColorAlgorithm colorizeAlgorithm = DefaultColorType.NONE.getAlgorithm();
     private boolean isSymbolReverted = false;
@@ -37,25 +38,49 @@ public class ParserBuilder {
      *
      * @return PixelScaleBuilder
      */
-    public PixelScaleConfig scaled() {
-        return new PixelScaleConfig(this);
+    public ImageScaleConfig scaled() {
+        return new ImageScaleConfig(this);
     }
 
+    /**
+     * Sets the Brightness value algorithm
+     *
+     * @param algorithm Brightness value algorithm
+     * @return builder
+     */
     public ParserBuilder parserAlgorithm(BrightnessValueCalculator algorithm) {
         this.algorithm = algorithm;
         return this;
     }
 
+    /**
+     * Sets the Brightness value algorithm
+     *
+     * @param algorithm Brightness value algorithm
+     * @return builder
+     */
     public ParserBuilder parserAlgorithm(Algorithms algorithm) {
         this.algorithm = algorithm.getAlgorithm();
         return this;
     }
 
-    public ParserBuilder reversed(boolean isSymbolWhiteToBlack) {
-        this.isSymbolReverted = isSymbolWhiteToBlack;
+    /**
+     * Reverses the brightness value meaning.<br> So a value of 1 means bright, and 255 means dark
+     *
+     * @param whiteToBlack if true then 1 = bright and 255 = dark
+     * @return builder
+     */
+    public ParserBuilder reversed(boolean whiteToBlack) {
+        this.isSymbolReverted = whiteToBlack;
         return this;
     }
 
+    /**
+     * Sets the symbol color algorithm
+     *
+     * @param defaultColorType color algorithm
+     * @return builder
+     */
     public ParserBuilder colorAlgorithm(DefaultColorType defaultColorType) {
         colorAlgorithm(defaultColorType.getAlgorithm());
         return this;
@@ -76,9 +101,10 @@ public class ParserBuilder {
      * @return your pixelParserConfig ready to be used
      */
     public ParserConfig build() {
+        validateFields();
 
         return new ParserConfig()
-                .setScale(pixelScale)
+                .setScale(imageScale)
                 .setSymbols(brightnessSymbols)
                 .setAlgorithm(algorithm)
                 .setSymbolReversed(isSymbolReverted)
@@ -86,24 +112,49 @@ public class ParserBuilder {
 
     }
 
+    /**
+     * Validate {@link ParserBuilder} fields
+     */
+    private void validateFields() {
+        //Unless you've defined fields as null, there really isn't much to validate
+        new ParserBuilderValidator()
+                .validateSymbols(brightnessSymbols);
+    }
 
-    public static final class PixelScaleConfig {
+
+    /**
+     * Image scaling configurator <br>
+     * This class is used to configure your image scale
+     */
+    public static final class ImageScaleConfig {
 
         private final ParserBuilder builder;
         private int width;
         private int height;
-        private PixelScaleAlgorithm pixelScaleAlgorithm = PixelScaleAlgorithm.DEFAULT;
+        private ImageScaleAlgorithm imageScaleAlgorithm = ImageScaleAlgorithm.DEFAULT;
 
-        public PixelScaleConfig(ParserBuilder builder) {
+        public ImageScaleConfig(ParserBuilder builder) {
             this.builder = builder;
         }
 
-        public PixelScaleConfig width(int width) {
+        /**
+         * Sets the width of new image
+         *
+         * @param width new image width
+         * @return builder
+         */
+        public ImageScaleConfig width(int width) {
             this.width = width;
             return this;
         }
 
-        public PixelScaleConfig height(int height) {
+        /**
+         * Sets the scale height
+         *
+         * @param height new image height
+         * @return builder
+         */
+        public ImageScaleConfig height(int height) {
             this.height = height;
             return this;
         }
@@ -111,11 +162,11 @@ public class ParserBuilder {
         /**
          * Sets the image scaling algorithm, this doesn't change much
          *
-         * @param algorithm
-         * @return
+         * @param algorithm scale algorithm
+         * @return builder
          */
-        public PixelScaleConfig algorithm(PixelScaleAlgorithm algorithm) {
-            this.pixelScaleAlgorithm = algorithm;
+        public ImageScaleConfig algorithm(ImageScaleAlgorithm algorithm) {
+            this.imageScaleAlgorithm = algorithm;
             return this;
         }
 
@@ -123,7 +174,7 @@ public class ParserBuilder {
          * @return the built pixelScaleConfig
          */
         public ParserBuilder getScale() {
-            builder.pixelScale = new PixelScale(width, height, pixelScaleAlgorithm);
+            builder.imageScale = new ImageScale(width, height, imageScaleAlgorithm);
             return builder;
         }
     }

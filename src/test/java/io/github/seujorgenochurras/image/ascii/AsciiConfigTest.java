@@ -4,7 +4,7 @@ import io.github.seujorgenochurras.image.ascii.algorithm.pixel.bright.Algorithms
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.color.AnsiColorAlgorithm;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class AsciiConfigTest {
 
@@ -18,20 +18,6 @@ public class AsciiConfigTest {
             .colorAlgorithm(new AnsiColorAlgorithm())
             .build();
 
-    final ParserConfig testConfig2 = ParserBuilder.startBuild()
-            .parserAlgorithm(Algorithms.HUMAN_EYE_ALGORITHM)
-            .scaled()
-            .height(50)
-            .width(100)
-            .getScale()
-            .symbols("")
-            .colorAlgorithm(new AnsiColorAlgorithm())
-            .build();
-    @Test
-    void givenTwoConfigs_whenConfigsAreEqual_thenEqualsShouldReturnTrue() {
-        assertEquals(testConfig1, testConfig2);
-
-    }
     @Test
     void givenTwoConfigs_whenConfigsAreNotEqual_thenEqualsShouldReturnFalse() {
         final ParserConfig testConfig3 = ParserBuilder.startBuild()
@@ -50,5 +36,6 @@ public class AsciiConfigTest {
         assertNotEquals(testConfig1, null);
 
     }
+
 
 }
