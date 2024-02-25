@@ -1,6 +1,6 @@
 package io.github.seujorgenochurras.image.ascii.algorithm.pixel.scale;
 
-public enum PixelScaleAlgorithm {
+public enum ImageScaleAlgorithm {
     DEFAULT(1),
     SMOOTH(4),
     FAST(2),
@@ -9,7 +9,7 @@ public enum PixelScaleAlgorithm {
 
     private final int id;
 
-    PixelScaleAlgorithm(int id) {
+    ImageScaleAlgorithm(int id) {
         this.id = id;
     }
 

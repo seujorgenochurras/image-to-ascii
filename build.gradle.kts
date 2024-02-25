@@ -10,8 +10,6 @@ repositories {
 dependencies {
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
-    implementation("io.metaloom.video:video4j:1.3.0")
-    implementation("org.openpnp:opencv:4.6.0-0")
 }
 tasks.test {
     useJUnitPlatform()
@@ -24,7 +22,7 @@ tasks.jacocoTestReport {
 tasks.withType(Jar::class) {
     manifest {
         attributes["Manifest-Version"] = "1.0"
-        attributes["Main-Class"] = "io.github.seujorgenochurras.ScreenParser"
+        attributes["Main-Class"] = "io.github.seujorgenochurras.demo.ImageToAscii"
     }
 }
 publishing {
@@ -32,7 +30,7 @@ publishing {
         create<MavenPublication>("mavenJava") {
             groupId = "io.github.seujorgenochurras"
             artifactId = "image-to-ascii"
-            version = "0.0.3"
+            version = "0.0.4"
             from(components["java"])
 
             pom {
@@ -82,6 +80,10 @@ signing {
 }
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
+}
+
+tasks.publish{
+    dependsOn(tasks.test)
 }
 
 jacoco{
