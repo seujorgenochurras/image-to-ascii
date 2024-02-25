@@ -7,7 +7,7 @@ public abstract class ModifiableColor {
         this.colorValue = colorValue;
     }
 
-    public int getColorValue() {
+    public int asDecimal() {
         return colorValue;
     }
 

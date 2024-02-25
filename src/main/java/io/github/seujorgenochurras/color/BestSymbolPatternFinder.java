@@ -3,8 +3,6 @@ package io.github.seujorgenochurras.color;
 import io.github.seujorgenochurras.color.symbol.Symbol;
 import io.github.seujorgenochurras.color.symbol.SymbolList;
 import io.github.seujorgenochurras.image.BetterImage;
-import io.github.seujorgenochurras.image.ascii.AsciiParser;
-import io.github.seujorgenochurras.image.ascii.ParserConfig;
 import io.github.seujorgenochurras.image.ascii.algorithm.pixel.bright.Algorithms;
 
 import java.awt.*;
@@ -35,9 +33,8 @@ public class BestSymbolPatternFinder {
      * @param symbolAccuracy amount of preciseness of symbols representation, for example: <br>
      *                       symbolAcurracy of 2 means that a symbol can either represent its brightness value +1 or -1,
      *                       <b>lower means high precision</b>
-     *
-     * @param maxSymbols maximum amount of symbols
-     * @param chars unsortedSymbols
+     * @param maxSymbols     maximum amount of symbols
+     * @param chars          unsortedSymbols
      * @return the best symbol pattern possible in the font Fira Mono
      */
     //TODO refactor this non-sense shit
@@ -87,11 +84,11 @@ public class BestSymbolPatternFinder {
         betterImage.getPixels().forEach(pixel -> {
             var color = pixel.color;
 
-            int red = color.getRed().getColorValue();
-            int green = color.getGreen().getColorValue();
-            int blue = color.getBlue().getColorValue();
+            int red = color.getRed().asDecimal();
+            int green = color.getGreen().asDecimal();
+            int blue = color.getBlue().asDecimal();
 
-            long pixelBrightness = Algorithms.BRIGHTEST_PIXEL.getAlgorithm().getPixelRepresentation(red, green, blue);
+            long pixelBrightness = Algorithms.BRIGHTEST_PIXEL.getAlgorithm().getBrightnessValue(red, green, blue);
             avgPixelBrightness.addAndGet(pixelBrightness);
 
         });

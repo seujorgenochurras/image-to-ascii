@@ -6,12 +6,12 @@ import org.junit.jupiter.api.Test;
 
 import java.awt.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AnsiColorAlgorithmTest {
 
     @Test
-    void givenColor_whenColorHasRGBValues_thenReturnAnsiRepresentation(){
+    void givenColor_whenColorHasRGBValues_thenReturnAnsiRepresentation() {
         int red = 120;
         int green = 32;
         int blue = 90;
@@ -22,7 +22,7 @@ public class AnsiColorAlgorithmTest {
 
         String ansifiedColor = colorAlgorithm.getColorRepresentation(pixelColor);
 
-        assertEquals("\u001B[38;2;" + red + ";" + green + ";" + blue + "m", ansifiedColor );
+        assertEquals("\u001B[38;2;" + red + ";" + green + ";" + blue + "m", ansifiedColor);
     }
 
 }

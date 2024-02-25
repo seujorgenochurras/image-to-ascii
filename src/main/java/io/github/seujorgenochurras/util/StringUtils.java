@@ -12,11 +12,11 @@ public class StringUtils {
         return utfChars;
     }
 
-    public static boolean containsAll(String s, String... elements){
+    public static boolean containsAll(String s, String... elements) {
         boolean containsAll = true;
-        for(String element : elements){
+        for (String element : elements) {
             containsAll = s.contains(element);
-            if(!containsAll) break;
+            if (!containsAll) break;
         }
         return containsAll;
     }
