@@ -30,7 +30,7 @@ publishing {
         create<MavenPublication>("mavenJava") {
             groupId = "io.github.seujorgenochurras"
             artifactId = "image-to-ascii"
-            version = "0.0.4"
+            version = "0.0.5"
             from(components["java"])
 
             pom {
@@ -76,7 +76,7 @@ java {
 }
 signing {
     useGpgCmd()
-    sign(publishing.publications["mavenJava"])
+    sign(configurations.archives.get())
 }
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
@@ -88,6 +88,6 @@ tasks.publish{
 
 jacoco{
     toolVersion = "0.8.11"
-    reportsDirectory = layout.buildDirectory.dir("jacoco")
+    reportsDirectory.set(layout.buildDirectory.dir("jacoco"))
 }
 
