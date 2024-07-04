@@ -76,7 +76,10 @@ java {
 }
 signing {
     useGpgCmd()
-    sign(configurations.archives.get())
+    val secretKey = project.properties["secretSigningKey"].toString()
+    val secretKeyPassword = project.properties["secretSigningKeyPassword"].toString()
+    useInMemoryPgpKeys(secretKey, secretKeyPassword)
+    sign(publishing.publications)
 }
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
