@@ -24,7 +24,7 @@ Gradle:
 ```gradle
 
 dependencies {
-  implementation ("io.github.seujorgenochurras:image-to-ascii:0.0.4")
+  implementation ("io.github.seujorgenochurras:image-to-ascii:0.0.5")
 }
 
 ```
@@ -36,7 +36,7 @@ Maven:
 <dependency>
     <groupId>io.github.seujorgenochurras</groupId>
     <artifactId>image-to-ascii</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
 </dependency>
 
 ```
