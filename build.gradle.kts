@@ -76,7 +76,7 @@ java {
 }
 signing {
     useGpgCmd()
-    sign(publishing.publications["mavenJava"])
+    sign(configurations.archives.get())
 }
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
