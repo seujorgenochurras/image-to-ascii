@@ -45,11 +45,6 @@ Maven:
 
 ``jpm -i=io.github.seujorgenochurras.image-to-ascii``
 
-⚠️ NOT RECOMMENDED ⚠️ [JPM](https://github.com/seujorgenochurras/Jhey-Package-Manager) has a whole lots of bugs
-and it'll probably give you a massive headache.<br>
-This is here because I worked hard (and badly) on it,
-if you liked the idea please let me know somehow.
-
 # Usage
 
 Since the parser is highly configurable it might be really annoying to use.
